@@ -1,13 +1,13 @@
-import { Route, Routes } from "react-router-dom";
-import { Home } from "./Home";
-import { Login } from "./Login";
-import { CompanyList } from "./CompanyList";
-import { JobList } from "./JobList";
-import { CompanyDetail } from "./CompanyDetail";
-
-import { useState, useEffect } from "react";
-
 import { useTheme } from "@mui/material/styles";
+import { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { JobList } from "./JobList";
+import { Profile } from "../pages/Profile";
+import { CompanyList } from "../pages/CompanyList";
+import { CompanyCard } from "./CompanyCard";
 
 import JoblyApi from "../utils/api";
 
@@ -21,7 +21,6 @@ export const AppRoutes = () => {
       try {
         const allCompanies = await JoblyApi.getAllCompanies();
         setCompanies(allCompanies);
-        console.log("allCompanies", allCompanies);
       } catch (error) {
         console.error("Error fetching companies:", error);
         setCompanies([]);
@@ -30,27 +29,39 @@ export const AppRoutes = () => {
     fetchCompanies();
   }, []);
 
+  const filterCompanies = async (searchTerm) => {
+    try {
+      const filteredCompanies = await JoblyApi.filterCompanies(searchTerm);
+      setCompanies([...filteredCompanies]);
+    } catch (error) {
+      console.error("Error filtering companies:", error);
+      setCompanies([]);
+    }
+  };
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
 
-      <Route
-        path="/companies"
-        element={<CompanyList companies={companies} />}
-      />
-      <Route path="/companies/:company" element={<CompanyDetail />} />
+      <Route path="companies">
+        <Route
+          index
+          element={
+            <CompanyList
+              companies={companies}
+              filterCompanies={filterCompanies}
+            />
+          }
+        />
+        <Route
+          path=":companyHandle"
+          element={<CompanyCard companies={companies} />}
+        />
+      </Route>
 
       <Route path="/jobs" element={<JobList />} />
-
-      <Route
-        path="/profile"
-        element={
-          <>
-            <h1>Edit Profile</h1>
-          </>
-        }
-      />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
