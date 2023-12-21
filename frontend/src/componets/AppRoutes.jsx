@@ -1,43 +1,32 @@
 import { useTheme } from "@mui/material/styles";
+
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { JobList } from "./JobList";
+import { JobList } from "../pages/JobList";
 import { Profile } from "../pages/Profile";
 import { CompanyList } from "../pages/CompanyList";
 import { CompanyCard } from "./CompanyCard";
 
-import JoblyApi from "../utils/api";
+import { useCompanyData } from "../hooks/useCompanyData";
+import { useJobData } from "../hooks/useJobData";
 
 export const AppRoutes = () => {
   const theme = useTheme();
+  const [companyFilter, setCompanyFilter] = useState({ searchTerm: "" });
 
-  const [companies, setCompanies] = useState([]);
+  const { companies, isLoading: companiesLoading } =
+    useCompanyData(companyFilter);
+  const { jobs, isLoading: jobsLoading } = useJobData();
 
-  useEffect(() => {
-    async function fetchCompanies() {
-      try {
-        const allCompanies = await JoblyApi.getAllCompanies();
-        setCompanies(allCompanies);
-      } catch (error) {
-        console.error("Error fetching companies:", error);
-        setCompanies([]);
-      }
-    }
-    fetchCompanies();
-  }, []);
-
-  const filterCompanies = async (searchTerm) => {
-    try {
-      const filteredCompanies = await JoblyApi.filterCompanies(searchTerm);
-      setCompanies([...filteredCompanies]);
-    } catch (error) {
-      console.error("Error filtering companies:", error);
-      setCompanies([]);
-    }
+  const getCompanyFilter = (filter) => {
+    console.log({ filter });
+    setCompanyFilter(filter);
   };
+
+  if (companiesLoading || jobsLoading) return <h1>Loading...</h1>;
 
   return (
     <Routes>
@@ -48,10 +37,7 @@ export const AppRoutes = () => {
         <Route
           index
           element={
-            <CompanyList
-              companies={companies}
-              filterCompanies={filterCompanies}
-            />
+            <CompanyList companies={companies} filter={getCompanyFilter} />
           }
         />
         <Route
@@ -60,7 +46,7 @@ export const AppRoutes = () => {
         />
       </Route>
 
-      <Route path="/jobs" element={<JobList />} />
+      <Route path="/jobs" element={<JobList jobs={jobs} />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );
