@@ -42,7 +42,7 @@ export const AppRoutes = () => {
         />
         <Route
           path=":companyHandle"
-          element={<CompanyCard companies={companies} />}
+          element={<CompanyCard companies={companies} jobs={jobs} />}
         />
       </Route>
 

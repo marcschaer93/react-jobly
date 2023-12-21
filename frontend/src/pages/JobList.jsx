@@ -26,16 +26,7 @@ export const JobList = ({ jobs }) => {
       {jobs && jobs.length > 0 ? (
         <Box component="ul" sx={{ listStyle: "none" }}>
           {jobs.map((j) => (
-            <Box
-              component="li"
-              sx={{
-                // display: "flex",
-                // alignItems: "center",
-                gap: "30px",
-                marginBottom: "10px",
-              }}
-              key={j.title}
-            >
+            <Box component="li" key={j.id}>
               {<JobCard jobData={j} />}
             </Box>
           ))}

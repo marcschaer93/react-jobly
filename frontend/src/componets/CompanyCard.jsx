@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
 
 import { useParams, useNavigate } from "react-router-dom";
+import { JobCard } from "./JobCard";
 
 /** Shows Details, content and available Jobs of a Company
  *
@@ -18,7 +19,9 @@ import { useParams, useNavigate } from "react-router-dom";
  *
  */
 
-export const CompanyCard = ({ companies }) => {
+export const CompanyCard = ({ companies, jobs }) => {
+  console.log({ jobs });
+
   const theme = useTheme();
 
   const navigate = useNavigate();
@@ -31,7 +34,10 @@ export const CompanyCard = ({ companies }) => {
     return <p>Company not found</p>;
   }
 
-  const { name, description, logoUrl, numEmployees } = companyData;
+  const { name, description, logoUrl, numEmployees, handle } = companyData;
+
+  const companyJobs = jobs.filter((j) => j.companyHandle === handle);
+  console.log({ companyJobs });
 
   return (
     <>
@@ -66,6 +72,20 @@ export const CompanyCard = ({ companies }) => {
               <br />
             </Typography>
           </CardContent>
+          <Box>
+            <h1>Job List</h1>
+            {companyJobs && companyJobs.length > 0 ? (
+              <Box component="ul" sx={{ listStyle: "none" }}>
+                {companyJobs.map((j) => (
+                  <Box component="li" key={j.id}>
+                    {<JobCard jobData={j} />}
+                  </Box>
+                ))}
+              </Box>
+            ) : (
+              <p>No jobs available</p>
+            )}
+          </Box>
         </Card>
       </Box>
     </>
