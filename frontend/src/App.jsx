@@ -1,23 +1,61 @@
 import "./App.css";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "/src/utils/theme.js";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { AppRoutes } from "./componets/AppRoutes";
 import Navbar from "./componets/Navbar";
 
+import { CurrentUserContext } from "./utils/UserContext";
+
+import JoblyApi from "./utils/api";
+
 function App() {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userToken, setUserToken] = useState("");
+
+  const loginUser = async (username, password) => {
+    try {
+      // Make API call to get token
+      const token = await JoblyApi.loginUser(username, password);
+      setUserToken(token);
+      setCurrentUser(username); // Set the current user
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
+  const logoutUser = () => {
+    setCurrentUser(null);
+    setUserToken("");
+    navigate("/");
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        <CurrentUserContext.Provider
+          value={{
+            currentUser,
+            setCurrentUser,
+            userToken,
+            setUserToken,
+            loginUser,
+            logoutUser,
+          }}
+        >
+          <CssBaseline />
 
-        <Navbar />
+          <Navbar />
 
-        <AppRoutes />
+          <AppRoutes />
+        </CurrentUserContext.Provider>
       </ThemeProvider>
     </>
   );

@@ -44,7 +44,6 @@ class JoblyApi {
 
   static async getAllCompanies() {
     let res = await this.request(`companies`);
-    console.log("res", res.companies);
     return res.companies;
   }
 
@@ -55,8 +54,20 @@ class JoblyApi {
 
   static async getAllJobs() {
     let res = await this.request(`jobs`);
-    console.log("res", res.jobs);
     return res.jobs;
+  }
+
+  static async loginUser(username, password) {
+    let res = await this.request(`auth/token`, { username, password }, "post");
+    console.log("response", res);
+    console.log(res.token);
+    return res.token;
+  }
+
+  static async registerUser(data) {
+    let res = await this.request(`auth/register`, { ...data }, "post");
+    console.log("response", res);
+    return res.token;
   }
 }
 

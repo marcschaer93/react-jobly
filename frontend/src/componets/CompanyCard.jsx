@@ -20,8 +20,6 @@ import { JobCard } from "./JobCard";
  */
 
 export const CompanyCard = ({ companies, jobs }) => {
-  console.log({ jobs });
-
   const theme = useTheme();
 
   const navigate = useNavigate();

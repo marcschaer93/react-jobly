@@ -8,6 +8,7 @@ import { Login } from "../pages/Login";
 import { JobList } from "../pages/JobList";
 import { Profile } from "../pages/Profile";
 import { CompanyList } from "../pages/CompanyList";
+
 import { CompanyCard } from "./CompanyCard";
 
 import { useCompanyData } from "../hooks/useCompanyData";
@@ -22,7 +23,6 @@ export const AppRoutes = () => {
   const { jobs, isLoading: jobsLoading } = useJobData();
 
   const getCompanyFilter = (filter) => {
-    console.log({ filter });
     setCompanyFilter(filter);
   };
 

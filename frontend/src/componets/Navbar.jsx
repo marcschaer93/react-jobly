@@ -8,7 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 
+import { CurrentUserContext } from "../utils/UserContext";
+import { useContext } from "react";
+
 export default function Navbar() {
+  const { currentUser, logout } = useContext(CurrentUserContext);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -39,14 +44,26 @@ export default function Navbar() {
             >
               Profile
             </Button>
-            <Button
-              component={NavLink}
-              to="/login"
-              size="large"
-              color="inherit"
-            >
-              Login
-            </Button>
+
+            {currentUser ? (
+              <Button
+                onClick={() => logout()}
+                component={NavLink}
+                size="large"
+                color="inherit"
+              >
+                {`Logout ${currentUser}`}
+              </Button>
+            ) : (
+              <Button
+                component={NavLink}
+                to="/login"
+                size="large"
+                color="inherit"
+              >
+                Login
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
