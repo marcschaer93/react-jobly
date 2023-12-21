@@ -6,6 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+import { ApplyButton } from "./ui/ApplyButton";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 export const JobCard = ({ jobData }) => {
@@ -50,6 +52,7 @@ export const JobCard = ({ jobData }) => {
               <br />
             </Typography>
           </CardContent>
+          <ApplyButton />
         </Card>
       </Box>
     </>

@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "/src/utils/theme.js";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoutes } from "./componets/AppRoutes";
@@ -19,6 +19,15 @@ function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [userToken, setUserToken] = useState("");
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    if (!userToken || !currentUser) return;
+
+    const data = JoblyApi.getUserData(currentUser, userToken);
+    console.log("data", data);
+    setUserData(data);
+  }, [userToken]);
 
   const loginUser = async (username, password) => {
     try {
@@ -48,6 +57,8 @@ function App() {
             setUserToken,
             loginUser,
             logoutUser,
+            userData,
+            setUserData,
           }}
         >
           <CssBaseline />
