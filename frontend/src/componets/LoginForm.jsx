@@ -20,7 +20,7 @@ export const LoginForm = ({ onFormSwitch }) => {
     control,
     handleSubmit,
     reset,
-    formState: { errors }, // Handling form validation errors
+    formState: { errors },
   } = useForm({
     defaultValues: {
       username: "testuser",

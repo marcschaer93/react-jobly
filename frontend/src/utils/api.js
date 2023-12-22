@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL = "http://localhost:3001";
@@ -13,7 +14,7 @@ const BASE_URL = "http://localhost:3001";
 
 class JoblyApi {
   // the token for interactive with the API will be stored here.
-  static token;
+  // static token;
 
   static async request(endpoint, data = {}, method = "get", token = null) {
     console.debug("API Call:", endpoint, data, method);
@@ -59,24 +60,41 @@ class JoblyApi {
 
   static async loginUser(username, password) {
     let res = await this.request(`auth/token`, { username, password }, "post");
+    // this.token = res.token; // Set the token in the class upon successful login
+    // console.log("this.token", token);
     console.log("response", res);
     console.log(res.token);
     return res.token;
   }
 
+  // static async registerUser(data) {
+  //   let res = await this.request(`auth/register`, { ...data }, "post");
+  //   console.log("response Register", res);
+  //   return res.token;
+  // }
+
   static async registerUser(data) {
-    let res = await this.request(`auth/register`, { ...data }, "post");
-    console.log("response", res);
-    return res.token;
+    try {
+      const res = await this.request(`auth/register`, { ...data }, "post");
+      console.log("response Register", res);
+      return res.token; // Assuming success, return the token
+    } catch (error) {
+      console.error("Error registering user:", error);
+      return { error: error.response.data }; // Return the error response
+    }
   }
 
-  static async getUserData(username, token) {
+  static async getUserData(token) {
+    const username = JoblyApi.getUsernameByToken(token);
+
     let res = await this.request(`users/${username}`, {}, "get", token);
-    console.log("response getuserData", res);
-    return res;
+    console.log("response getuserData", res.user);
+    return res.user;
   }
 
-  static async applyForJob(username, jobId, token) {
+  static async applyForJob(jobId, token) {
+    const username = JoblyApi.getUsernameByToken(token);
+
     let res = await this.request(
       `users/${username}/jobs/${jobId}`,
       {},
@@ -87,13 +105,18 @@ class JoblyApi {
     return res;
   }
 
-  // router.post("/:username/jobs/:id"
+  static getUsernameByToken(token) {
+    // Decode the token to extract user information (username, etc.)
+    const decodedToken = jwtDecode(token);
+    const username = decodedToken.username;
+    return username;
+  }
 }
+
+export default JoblyApi;
 
 // for now, put token ("testuser" / "password" on class)
 // JoblyApi.token =
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
 //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
 //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-
-export default JoblyApi;

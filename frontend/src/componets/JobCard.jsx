@@ -15,11 +15,11 @@ import JoblyApi from "../utils/api";
 
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
-  const { userData, currentUser, userToken, setUserData } =
+  const { currentUser, userToken, setCurrentUser } =
     useContext(CurrentUserContext);
 
-  const appliedJobIds = currentUser ? userData.user.applications : [];
-  console.log({ appliedJobIds });
+  const appliedJobIds = currentUser ? currentUser.applications : [];
+  console.log("appliedJobs", appliedJobIds);
 
   const [applied, setApplied] = useState(false);
 
@@ -32,25 +32,22 @@ export const JobCard = ({ jobData }) => {
     if (applied) return;
 
     try {
-      await JoblyApi.applyForJob(currentUser, jobData.id, userToken);
-      setApplied(true);
-      setUserData((prevData) => ({
-        ...prevData,
-        user: {
-          ...prevData.user,
-          applications: [...(prevData.user.applications || []), jobData.id],
-        },
-      }));
+      await JoblyApi.applyForJob(jobData.id, userToken);
     } catch (error) {
       console.error("Error applying for job:", error);
     }
+    setApplied(true);
+    setCurrentUser((prevData) => ({
+      ...prevData,
+      applications: [...(prevData.applications || []), jobData.id],
+    }));
   };
 
   if (!jobData) {
     return <p>Job not found</p>;
   }
 
-  const { title, salary, equity, company_handle } = jobData;
+  const { title, salary, equity } = jobData;
 
   return (
     <>

@@ -13,7 +13,7 @@ export const Home = () => {
   return (
     <div>
       {currentUser ? (
-        <h1>{`Welcome Back, ${currentUser}!`}</h1>
+        <h1>{`Welcome Back, ${currentUser.username}!`}</h1>
       ) : (
         <>
           <Box

@@ -14,33 +14,64 @@ import { AppRoutes } from "./componets/AppRoutes";
 
 import JoblyApi from "./utils/api";
 
-import { jwtDecode } from "jwt-decode";
-
 /**
  * The main component managing user authentication and data for the entire application.
  * Handles user login, logout, and context management for user-related data.
  */
 
 function App() {
-  const navigate = useNavigate();
+  // const useLocalStorageToken = (key) => {
+  //   const [token, setToken] = useState(() => {
+  //     const storedToken = localStorage.getItem(key);
+  //     return storedToken || null;
+  //   });
+
+  //   useEffect(() => {
+  //     if (token !== null && token !== undefined) {
+  //       localStorage.setItem(key, token);
+  //     } else {
+  //       localStorage.removeItem(key);
+  //     }
+  //   }, [key, token]);
+
+  //   return [token, setToken];
+  // };
+  // const [userToken, setUserToken] = useLocalStorageToken("token");
+
   const [currentUser, setCurrentUser] = useState(null);
-  const [userToken, setUserToken] = useState("");
-  const [userData, setUserData] = useState("");
+  const [userToken, setUserToken] = useState(() => {
+    const storedToken = localStorage.getItem("token");
+    return storedToken || null;
+  });
+
+  // const [userToken, setUserToken] = useState(null);
+
+  // useEffect(() => {
+  //   const loggedInUserToken = localStorage.getItem("token");
+
+  //   if (loggedInUserToken) {
+  //     try {
+  //       const token = JSON.parse(loggedInUserToken);
+  //       console.log("token", token);
+  //       setUserToken(token);
+  //     } catch (error) {
+  //       console.error("Error parsing token:", error);
+  //       // Handle the error here, such as setting default token or showing an error message.
+  //     }
+  //   }
+  // }, []);
 
   useEffect(() => {
-    if (!userToken) return;
-
-    // Decode the token to extract user information (username, etc.)
-    const decodedToken = jwtDecode(userToken);
-    const username = decodedToken.username;
-    setCurrentUser(username);
-    console.log("username", username);
+    if (!userToken) {
+      setCurrentUser(null);
+      return;
+    }
 
     const fetchData = async () => {
       try {
-        const data = await JoblyApi.getUserData(username, userToken);
-        console.log("data", data);
-        setUserData(data);
+        const userData = await JoblyApi.getUserData(userToken);
+        setCurrentUser(userData);
+        console.log("data$", userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -48,11 +79,29 @@ function App() {
     fetchData();
   }, [userToken]);
 
+  // useEffect(() => {
+  //   if (userToken) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const userData = await JoblyApi.getUserData(userToken);
+  //         setCurrentUser(userData);
+  //         console.log("data$", userData);
+  //       } catch (error) {
+  //         console.error("Error fetching user data:", error);
+  //       }
+  //     };
+
+  //     fetchData();
+  //   } else {
+  //     setCurrentUser(null);
+  //   }
+  // }, [userToken, setCurrentUser]);
+
   const loginUser = async (username, password) => {
     try {
-      // Make API call to get token
       const token = await JoblyApi.loginUser(username, password);
       setUserToken(token);
+      localStorage.setItem("token", token);
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -60,8 +109,8 @@ function App() {
 
   const logoutUser = () => {
     setCurrentUser(null);
-    setUserToken("");
-    navigate("/");
+    setUserToken(null);
+    localStorage.removeItem("token");
   };
 
   return (
@@ -75,8 +124,6 @@ function App() {
             setUserToken,
             loginUser,
             logoutUser,
-            userData,
-            setUserData,
           }}
         >
           <CssBaseline />

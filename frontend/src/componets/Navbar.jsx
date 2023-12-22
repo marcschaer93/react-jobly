@@ -12,7 +12,7 @@ import { CurrentUserContext } from "../utils/UserContext";
 import { useContext } from "react";
 
 export default function Navbar() {
-  const { currentUser, logout } = useContext(CurrentUserContext);
+  const { currentUser, logoutUser } = useContext(CurrentUserContext);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -47,12 +47,13 @@ export default function Navbar() {
 
             {currentUser ? (
               <Button
-                onClick={() => logout()}
+                onClick={() => logoutUser()}
+                to="/"
                 component={NavLink}
                 size="large"
                 color="inherit"
               >
-                {`Logout ${currentUser}`}
+                {`Logout ${currentUser.username}`}
               </Button>
             ) : (
               <Button

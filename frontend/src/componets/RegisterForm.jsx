@@ -30,9 +30,26 @@ export const RegisterForm = ({ onFormSwitch }) => {
   const { setCurrentUser, setUserToken } = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
-  const onFormSubmit = (data) => {
-    const token = JoblyApi.registerUser(data);
-    setUserToken(token);
+  //   const onFormSubmit = (data) => {
+  //     const token = JoblyApi.registerUser(data);
+  //     setUserToken(token);
+  //     setCurrentUser(data.username);
+  //     navigate("/");
+  //     reset();
+  //   };
+
+  const onFormSubmit = async (data) => {
+    const response = await JoblyApi.registerUser(data);
+
+    if (response.error) {
+      // Handle registration error here (display message, prevent navigation, etc.)
+      console.error("Registration error:", response.error);
+      // Handle the error accordingly
+      return response.error;
+    }
+
+    // Assuming registration was successful
+    setUserToken(response.token);
     setCurrentUser(data.username);
     navigate("/");
     reset();
