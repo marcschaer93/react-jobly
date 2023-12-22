@@ -71,11 +71,23 @@ class JoblyApi {
   }
 
   static async getUserData(username, token) {
-    console.log("username", username);
     let res = await this.request(`users/${username}`, {}, "get", token);
-    console.log("response", res);
+    console.log("response getuserData", res);
     return res;
   }
+
+  static async applyForJob(username, jobId, token) {
+    let res = await this.request(
+      `users/${username}/jobs/${jobId}`,
+      {},
+      "post",
+      token
+    );
+    console.log("response applyForJob", res);
+    return res;
+  }
+
+  // router.post("/:username/jobs/:id"
 }
 
 // for now, put token ("testuser" / "password" on class)

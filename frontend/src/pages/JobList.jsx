@@ -1,6 +1,11 @@
 import Box from "@mui/material/Box";
 import { JobCard } from "../componets/JobCard";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import { useContext } from "react";
+import { CurrentUserContext } from "../utils/UserContext";
 
 /* Shows a List with all Jobs
  *
@@ -17,7 +22,6 @@ import { useNavigate } from "react-router-dom";
 
 export const JobList = ({ jobs }) => {
   const navigate = useNavigate();
-
   if (!jobs) return navigate("/jobs");
 
   return (

@@ -1,18 +1,10 @@
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-export const ApplyButton = () => {
-  const [applied, setApplied] = useState(false);
-
-  const toggleStatus = () => {
-    setApplied((status) => !status);
-  };
-
+export const ApplyButton = ({ applied, applyJob }) => {
   return (
     <Button
-      // component={Link}
-      // to="/login"
-      onClick={toggleStatus}
+      onClick={applyJob}
       variant="contained"
       color={applied ? "secondary" : "primary"}
       type="submit"

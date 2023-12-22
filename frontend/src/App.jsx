@@ -1,19 +1,25 @@
 import "./App.css";
 
 import CssBaseline from "@mui/material/CssBaseline";
-
 import { ThemeProvider } from "@mui/material/styles";
+
 import { theme } from "/src/utils/theme.js";
+import { CurrentUserContext } from "./utils/UserContext";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AppRoutes } from "./componets/AppRoutes";
 import Navbar from "./componets/Navbar";
-
-import { CurrentUserContext } from "./utils/UserContext";
+import { AppRoutes } from "./componets/AppRoutes";
 
 import JoblyApi from "./utils/api";
+
+import { jwtDecode } from "jwt-decode";
+
+/**
+ * The main component managing user authentication and data for the entire application.
+ * Handles user login, logout, and context management for user-related data.
+ */
 
 function App() {
   const navigate = useNavigate();
@@ -22,11 +28,24 @@ function App() {
   const [userData, setUserData] = useState("");
 
   useEffect(() => {
-    if (!userToken || !currentUser) return;
+    if (!userToken) return;
 
-    const data = JoblyApi.getUserData(currentUser, userToken);
-    console.log("data", data);
-    setUserData(data);
+    // Decode the token to extract user information (username, etc.)
+    const decodedToken = jwtDecode(userToken);
+    const username = decodedToken.username;
+    setCurrentUser(username);
+    console.log("username", username);
+
+    const fetchData = async () => {
+      try {
+        const data = await JoblyApi.getUserData(username, userToken);
+        console.log("data", data);
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchData();
   }, [userToken]);
 
   const loginUser = async (username, password) => {
@@ -34,7 +53,6 @@ function App() {
       // Make API call to get token
       const token = await JoblyApi.loginUser(username, password);
       setUserToken(token);
-      setCurrentUser(username); // Set the current user
     } catch (error) {
       console.error("Login failed:", error);
     }

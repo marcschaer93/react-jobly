@@ -20,6 +20,7 @@ export const AppRoutes = () => {
 
   const { companies, isLoading: companiesLoading } =
     useCompanyData(companyFilter);
+
   const { jobs, isLoading: jobsLoading } = useJobData();
 
   const getCompanyFilter = (filter) => {
