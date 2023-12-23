@@ -14,5 +14,9 @@ export const registerOptions = {
   },
   password: {
     required: "Enter password!",
+    minLength: {
+      value: 6,
+      message: "must be at least 6 characters!",
+    },
   },
 };

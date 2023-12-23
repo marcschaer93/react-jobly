@@ -67,20 +67,18 @@ class JoblyApi {
     return res.token;
   }
 
-  // static async registerUser(data) {
-  //   let res = await this.request(`auth/register`, { ...data }, "post");
-  //   console.log("response Register", res);
-  //   return res.token;
-  // }
-
   static async registerUser(data) {
     try {
       const res = await this.request(`auth/register`, { ...data }, "post");
-      console.log("response Register", res);
-      return res.token; // Assuming success, return the token
+      return { token: res.token };
     } catch (error) {
-      console.error("Error registering user:", error);
-      return { error: error.response.data }; // Return the error response
+      console.error("Register Error", error);
+      // if (error.response?.data === "Username already taken") {
+      //   return { error: "Username already taken" };
+      // }
+      // return { error: "Registration failed" };
+      return { error: "Username already taken" };
+      // return error;
     }
   }
 
