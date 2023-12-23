@@ -36,14 +36,18 @@ export default function Navbar() {
             <Button component={NavLink} to="/jobs" size="large" color="inherit">
               Jobs
             </Button>
-            <Button
-              component={NavLink}
-              to="/profile"
-              size="large"
-              color="inherit"
-            >
-              Profile
-            </Button>
+            {currentUser ? (
+              <Button
+                component={NavLink}
+                to="/profile"
+                size="large"
+                color="inherit"
+              >
+                Profile
+              </Button>
+            ) : (
+              ""
+            )}
 
             {currentUser ? (
               <Button

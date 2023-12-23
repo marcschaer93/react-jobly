@@ -4,7 +4,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { registerOptions } from "../../utils/registrOptions";
 
-export const FormInputText = ({ name, control, label, errors }) => {
+export const FormInputText = ({
+  name,
+  control,
+  label,
+  errors,
+  disabled = false,
+}) => {
   return (
     <Controller
       name={name}
@@ -18,6 +24,7 @@ export const FormInputText = ({ name, control, label, errors }) => {
           helperText={errors[name] && errors[name].message}
           variant="outlined"
           fullWidth
+          disabled={disabled}
           //   InputProps={{
           //     startAdornment: (
           //       <InputAdornment position="start">

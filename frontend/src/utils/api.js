@@ -109,7 +109,21 @@ class JoblyApi {
     const username = decodedToken.username;
     return username;
   }
+
+  static editUserProfile(data, token) {
+    const username = JoblyApi.getUsernameByToken(token);
+
+    let res = this.request(`users/${username}`, data, "patch", token);
+    console.log("res", res);
+  }
 }
+
+// ** PATCH /[username] { user } => { user }
+//  *
+//  * Data can include:
+//  *   { firstName, lastName, password, email }
+//  *
+//  * Returns { username, firstName, lastName, email, isAdmin }
 
 export default JoblyApi;
 
