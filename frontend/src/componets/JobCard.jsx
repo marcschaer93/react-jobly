@@ -15,10 +15,12 @@ import JoblyApi from "../utils/api";
 
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
+  console.log("jobData", jobData);
+
   const { currentUser, userToken, setCurrentUser } =
     useContext(CurrentUserContext);
 
-  const appliedJobIds = currentUser ? currentUser.applications : [];
+  const appliedJobIds = currentUser ? currentUser.applications : [""];
   console.log("appliedJobs", appliedJobIds);
 
   const [applied, setApplied] = useState(false);
@@ -47,7 +49,7 @@ export const JobCard = ({ jobData }) => {
     return <p>Job not found</p>;
   }
 
-  const { title, salary, equity } = jobData;
+  const { title, salary, equity, companyName } = jobData;
 
   return (
     <>
@@ -59,31 +61,46 @@ export const JobCard = ({ jobData }) => {
           width: "100%",
         }}
       >
-        <Card sx={{ width: "70vW" }}>
+        <Card sx={{ width: "50vW" }}>
           {" "}
           <CardContent>
-            <Typography
-              sx={{ fontSize: "2rem" }}
-              color="text.secondary"
-              gutterBottom
-            >
+            <Typography variant="h5" color="text.secondary" gutterBottom>
               {title}
+            </Typography>
+            <Typography variant="body1" color="text.primary" gutterBottom>
+              {companyName}
             </Typography>
             <Typography variant="h5" component="div"></Typography>
             {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
               {logoUrl ? logoUrl : null}
             </Typography> */}
             <Typography variant="body2">
-              {salary}
+              {salary ? (
+                <div>
+                  <span style={{ fontWeight: "bold" }}>Salary:</span>{" "}
+                  {`${salary}`}
+                </div>
+              ) : (
+                ""
+              )}
               <br />
             </Typography>
             <Typography variant="body2">
-              {equity}
+              {equity ? (
+                <div>
+                  <span style={{ fontWeight: "bold" }}>Equity:</span>{" "}
+                  {`${equity}`}
+                </div>
+              ) : (
+                ""
+              )}
               <br />
             </Typography>
           </CardContent>
           {currentUser ? (
-            <ApplyButton applyJob={applyJob} applied={applied} />
+            <Box sx={{ textAlign: "right", mr: "25px", mb: "25px" }}>
+              <ApplyButton applyJob={applyJob} applied={applied} />
+            </Box>
           ) : (
             ""
           )}

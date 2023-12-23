@@ -110,11 +110,12 @@ class JoblyApi {
     return username;
   }
 
-  static editUserProfile(data, token) {
+  static async editUserProfile(data, token) {
     const username = JoblyApi.getUsernameByToken(token);
 
-    let res = this.request(`users/${username}`, data, "patch", token);
-    console.log("res", res);
+    let res = await this.request(`users/${username}`, data, "patch", token);
+    console.log("res", res.user);
+    return res.user;
   }
 }
 

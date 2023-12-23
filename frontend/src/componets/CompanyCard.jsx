@@ -71,7 +71,6 @@ export const CompanyCard = ({ companies, jobs }) => {
             </Typography>
           </CardContent>
           <Box>
-            <h1>Job List</h1>
             {companyJobs && companyJobs.length > 0 ? (
               <Box component="ul" sx={{ listStyle: "none" }}>
                 {companyJobs.map((j) => (

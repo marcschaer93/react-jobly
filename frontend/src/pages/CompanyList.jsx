@@ -24,8 +24,6 @@ export const CompanyList = ({ companies, filter }) => {
         gap: "25px",
       }}
     >
-      <h1>Company List</h1>
-
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
 
       {companies && companies.length > 0 ? (

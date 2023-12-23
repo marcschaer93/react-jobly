@@ -1,7 +1,10 @@
 import Box from "@mui/material/Box";
 import { JobCard } from "../componets/JobCard";
+import { Typography } from "@mui/material";
+import { SearchBar } from "../componets/ui/searchBar";
 
 import { useNavigate, useParams } from "react-router-dom";
+
 import { useState, useEffect } from "react";
 
 import { useContext } from "react";
@@ -25,10 +28,29 @@ export const JobList = ({ jobs }) => {
   if (!jobs) return navigate("/jobs");
 
   return (
-    <Box>
-      <h1>Job List</h1>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: "25px",
+        pt: "50px",
+      }}
+    >
+      <SearchBar />
+      {/* <Typography sx={{ textAlign: "center" }} variant="h4">
+        Job List
+      </Typography> */}
       {jobs && jobs.length > 0 ? (
-        <Box component="ul" sx={{ listStyle: "none" }}>
+        <Box
+          component="ul"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            listStyle: "none",
+          }}
+        >
           {jobs.map((j) => (
             <Box component="li" key={j.id}>
               {<JobCard jobData={j} />}

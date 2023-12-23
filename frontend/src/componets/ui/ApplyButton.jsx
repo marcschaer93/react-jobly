@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@mui/material";
 
 export const ApplyButton = ({ applied, applyJob }) => {
@@ -8,12 +7,11 @@ export const ApplyButton = ({ applied, applyJob }) => {
       variant="contained"
       color={applied ? "secondary" : "primary"}
       type="submit"
-      size="m"
+      size="small"
       sx={{
-        borderRadius: "50px",
+        borderRadius: "8px",
         width: "120px",
-        marginTop: "16px",
-        fontWeight: "bold",
+        fontWeight: "600",
       }}
     >
       {applied ? "Applied" : "Apply"}

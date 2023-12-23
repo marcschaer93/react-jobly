@@ -13,7 +13,8 @@ import { CurrentUserContext } from "../utils/UserContext";
 import { useNavigate, Navigate } from "react-router-dom";
 
 export const EditForm = () => {
-  const { currentUser, userToken } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser, userToken } =
+    useContext(CurrentUserContext);
 
   const { username, firstName, lastName, email } = currentUser;
 
@@ -35,21 +36,12 @@ export const EditForm = () => {
   const navigate = useNavigate();
 
   const onFormSubmit = (data) => {
-    console.log("data", data);
-    JoblyApi.editUserProfile(data, userToken);
+    const { firstName, lastName, email } = data;
+    const dataWithoutUsername = { firstName, lastName, email };
 
-    // const registrationResult = await JoblyApi.registerUser(data);
-    // if (registrationResult.token) {
-    //   const token = registrationResult.token;
-    //   setUserToken(token);
-    //   navigate("/");
-    //   reset();
-    // } else {
-    //   setError("username", {
-    //     type: "manual",
-    //     message: `${registrationResult.error}`,
-    //   });
-    // }
+    JoblyApi.editUserProfile(dataWithoutUsername, userToken);
+    setCurrentUser(() => data);
+    navigate("/");
   };
 
   return (
@@ -112,6 +104,14 @@ export const EditForm = () => {
               errors={errors}
               disabled={true}
             />
+
+            {/* <TextField
+              label="Username"
+              variant="outlined"
+              value={`${username}`}
+              fullWidth
+              disabled
+            /> */}
           </Box>
 
           <Box

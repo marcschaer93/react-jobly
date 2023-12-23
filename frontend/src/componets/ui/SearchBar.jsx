@@ -19,8 +19,9 @@ export const SearchBar = ({ searchTerm, handleChange }) => {
         <TextField
           value={searchTerm}
           onChange={handleChange}
+          size="small"
           fullWidth
-          sx={{ width: "60vW", borderRadius: "16px" }}
+          sx={{ width: "50vW", borderRadius: "16px" }}
           id="input-with-icon-textfield"
           InputProps={{
             startAdornment: (
