@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button, Typography, Box } from "@mui/material";
 
@@ -11,7 +11,7 @@ import { FormInputPassword } from "./form/FormInputPassword";
 
 import { CurrentUserContext } from "../utils/UserContext";
 
-export const LoginForm = ({ onFormSwitch }) => {
+export const LoginForm = () => {
   const { setCurrentUser, currentUser, loginUser } =
     useContext(CurrentUserContext);
   const navigate = useNavigate();
@@ -161,12 +161,26 @@ export const LoginForm = ({ onFormSwitch }) => {
         className="form-switch-container"
       >
         Not a Member yet?
-        <span
-          onClick={() => onFormSwitch("register")}
+        {/* <span
+          //   onClick={() => onFormSwitch("register")}
+          //   onClick={() => onFormSwitch("register")}
           sx={{ color: "#4c00b4", cursor: "pointer", fontWeight: "bold" }}
         >
           Sign Up.
-        </span>
+        </span> */}
+        <Box
+          component={Link}
+          to="/register"
+          exact="true"
+          sx={{
+            color: "#4c00b4",
+            cursor: "pointer",
+            fontWeight: "bold",
+            textDecoration: "none",
+          }}
+        >
+          Sign Up.
+        </Box>
       </Box>
     </Box>
   );

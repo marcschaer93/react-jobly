@@ -9,9 +9,12 @@ import { FormInputText } from "./form/FormInputText";
 import JoblyApi from "../utils/api";
 import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
+import { useTheme } from "@mui/material";
 
-export const RegisterForm = ({ onFormSwitch }) => {
+export const RegisterForm = () => {
+  const theme = useTheme();
+
   const {
     control,
     handleSubmit,
@@ -205,12 +208,21 @@ export const RegisterForm = ({ onFormSwitch }) => {
         className="form-switch-container"
       >
         Already a Member ?
-        <span
-          onClick={() => onFormSwitch("login")}
-          sx={{ color: "#4c00b4", cursor: "pointer", fontWeight: "bold" }}
+        <Box
+          component={Link}
+          to="/login"
+          exact="true"
+          //   onClick={() => onFormSwitch("login")}
+          //   onClick={() => onFormSwitch("login")}
+          sx={{
+            cursor: "pointer",
+            fontWeight: "bold",
+            textDecoration: "none",
+            color: "#4c00b4",
+          }}
         >
-          Sign Up.
-        </span>
+          Login
+        </Box>
       </Box>
     </Box>
   );
