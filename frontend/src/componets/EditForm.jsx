@@ -12,6 +12,19 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
 import { useNavigate, Navigate } from "react-router-dom";
 
+import {
+  formContainer,
+  titleContainer,
+  underline,
+  inputs,
+  input,
+  submitContainer,
+  switchContainer,
+  link,
+  lostPasswordContainer,
+  submitButton,
+} from "../styles/formStyles";
+
 export const EditForm = () => {
   const { currentUser, setCurrentUser, userToken } =
     useContext(CurrentUserContext);
@@ -45,58 +58,17 @@ export const EditForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        bgcolor: "background.paper",
-        width: "600px",
-        margin: "auto",
-        paddingBottom: "30px",
-        marginTop: "30px",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "9px",
-          width: "100%",
-          marginTop: "30px",
-          paddingTop: "30px",
-        }}
-      >
+    <Box sx={formContainer}>
+      <Box sx={titleContainer}>
         <Typography variant="h1" sx={{ fontSize: "48px", fontWeight: 700 }}>
           Profile
         </Typography>
-        <span
-          className="underline"
-          sx={{
-            display: "inline-block",
-            backgroundColor: "#6e5494",
-            width: "61px",
-            height: "6px",
-            borderRadius: "9px",
-            verticalAlign: "bottom",
-            marginTop: "25px",
-          }}
-        ></span>
+        <Box sx={underline}></Box>
       </Box>
 
       <form autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
-        <Box
-          sx={{
-            marginTop: "55px",
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "25px",
-          }}
-          className="inputs"
-        >
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
+        <Box sx={inputs} className="inputs">
+          <Box sx={input} className="input">
             <FormInputText
               name="username"
               control={control}
@@ -114,32 +86,26 @@ export const EditForm = () => {
             /> */}
           </Box>
 
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
-            <FormInputText
-              name="firstName"
-              control={control}
-              label="First name"
-              errors={errors}
-            />
+          <Box sx={{ display: "flex", gap: "20px" }}>
+            <Box sx={{ width: "230px" }}>
+              <FormInputText
+                name="firstName"
+                control={control}
+                label="First name"
+                errors={errors}
+              />
+            </Box>
+            <Box sx={{ width: "230px" }}>
+              <FormInputText
+                name="lastName"
+                control={control}
+                label="Last Name"
+                errors={errors}
+              />
+            </Box>
           </Box>
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
-            <FormInputText
-              name="lastName"
-              control={control}
-              label="Last Name"
-              errors={errors}
-            />
-          </Box>
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
+
+          <Box sx={input} className="input">
             <FormInputText
               name="email"
               control={control}
@@ -149,25 +115,13 @@ export const EditForm = () => {
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "60px auto",
-          }}
-          className="submit-container"
-        >
+        <Box sx={submitContainer} className="submit-container">
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             type="submit"
-            size="large"
-            sx={{
-              borderRadius: "50px",
-              width: "480px",
-              marginTop: "16px",
-              fontWeight: "bold",
-            }}
+            size="medium"
+            sx={submitButton}
           >
             Save Changes
           </Button>

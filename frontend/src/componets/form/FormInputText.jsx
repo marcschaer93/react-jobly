@@ -18,6 +18,7 @@ export const FormInputText = ({
       rules={registerOptions[name]}
       render={({ field }) => (
         <TextField
+          size="small"
           label={label}
           {...field}
           error={!!errors[name]}

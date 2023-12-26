@@ -4,12 +4,23 @@ import { useNavigate, Navigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button, Typography, Box } from "@mui/material";
 
-import "./LoginForm.css";
-
 import { FormInputUsername } from "./form/FormInputUsername";
 import { FormInputPassword } from "./form/FormInputPassword";
 
 import { CurrentUserContext } from "../utils/UserContext";
+
+import {
+  formContainer,
+  titleContainer,
+  underline,
+  inputs,
+  input,
+  submitContainer,
+  switchContainer,
+  link,
+  lostPasswordContainer,
+  submitButton,
+} from "../styles/formStyles";
 
 export const LoginForm = () => {
   const { setCurrentUser, currentUser, loginUser } =
@@ -32,61 +43,21 @@ export const LoginForm = () => {
     const { username, password } = data;
     loginUser(username, password);
     navigate("/");
+    reset();
   };
 
   return (
-    <Box
-      sx={{
-        bgcolor: "background.paper",
-        width: "600px",
-        margin: "auto",
-        paddingBottom: "30px",
-        marginTop: "30px",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "9px",
-          width: "100%",
-          marginTop: "30px",
-          paddingTop: "30px",
-        }}
-      >
+    <Box sx={formContainer}>
+      <Box sx={titleContainer}>
         <Typography variant="h1" sx={{ fontSize: "48px", fontWeight: 700 }}>
           Login Form
         </Typography>
-        <span
-          className="underline"
-          sx={{
-            display: "inline-block",
-            backgroundColor: "#6e5494",
-            width: "61px",
-            height: "6px",
-            borderRadius: "9px",
-            verticalAlign: "bottom",
-            marginTop: "25px",
-          }}
-        ></span>
+        <Box sx={underline}></Box>
       </Box>
 
       <form autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
-        <Box
-          sx={{
-            marginTop: "55px",
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-            gap: "25px",
-          }}
-          className="inputs"
-        >
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
+        <Box sx={inputs}>
+          <Box sx={input}>
             <FormInputUsername
               name="username"
               control={control}
@@ -95,10 +66,7 @@ export const LoginForm = () => {
             />
           </Box>
 
-          <Box
-            sx={{ display: "flex", alignItems: "center", width: "480px" }}
-            className="input"
-          >
+          <Box sx={input}>
             <FormInputPassword
               name="password"
               control={control}
@@ -110,78 +78,29 @@ export const LoginForm = () => {
 
         <Box
           onClick={() => onFormSwitch("register")}
-          sx={{
-            display: "flex",
-            justifyContent: "left",
-            color: "#797979",
-            fontSize: "16px",
-            paddingLeft: "2px",
-            cursor: "pointer",
-            marginLeft: "60px",
-            marginTop: "5px",
-          }}
-          className="lost-password-container"
+          sx={lostPasswordContainer}
         >
           Lost Password
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "60px auto",
-          }}
-          className="submit-container"
-        >
+        <Box sx={submitContainer}>
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             type="submit"
-            size="large"
-            sx={{
-              borderRadius: "50px",
-              width: "480px",
-              marginTop: "16px",
-              fontWeight: "bold",
-            }}
+            size="medium"
+            sx={submitButton}
           >
             Login
           </Button>
         </Box>
-      </form>
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          color: "#797979",
-          fontSize: "18px",
-          gap: "10px",
-        }}
-        className="form-switch-container"
-      >
-        Not a Member yet?
-        {/* <span
-          //   onClick={() => onFormSwitch("register")}
-          //   onClick={() => onFormSwitch("register")}
-          sx={{ color: "#4c00b4", cursor: "pointer", fontWeight: "bold" }}
-        >
-          Sign Up.
-        </span> */}
-        <Box
-          component={Link}
-          to="/register"
-          exact="true"
-          sx={{
-            color: "#4c00b4",
-            cursor: "pointer",
-            fontWeight: "bold",
-            textDecoration: "none",
-          }}
-        >
-          Sign Up.
+        <Box sx={switchContainer}>
+          Not a Member yet?
+          <Box component={Link} to="/register" exact="true" sx={link}>
+            Sign Up.
+          </Box>
         </Box>
-      </Box>
+      </form>
     </Box>
   );
 };

@@ -33,16 +33,15 @@
   font-weight: 700;
 } */
 
-.underline {
-  display: inline-block; /* Ensures the span takes the width of content */
+/* .underline {
+  display: inline-block;
   background-color: #6e5494;
-  /* background-color: var(--primary-color); */
+  background-color: #d41b64;
   width: 61px;
   height: 6px;
   border-radius: 9px;
-  vertical-align: bottom; /* Aligns with the text */
-  margin-top: 25px;
-}
+  vertical-align: bottom;
+} */
 
 /* .inputs {
   margin-top: 55px;
@@ -68,13 +67,7 @@
   margin-left: 60px;
   margin-top: 5px;
 }
-
-.submit-container {
-  display: flex;
-  /* gap: 30px; */
-  justify-content: center;
-  margin: 60px auto;
-}
+/* 
 
 /* .submitBtn {
     width: 480px;
@@ -83,8 +76,8 @@
   } */
 
 .form-switch-container {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
   color: #797979;
   font-size: 18px;
   gap: 10px;

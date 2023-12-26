@@ -10,9 +10,26 @@ import { NavLink } from "react-router-dom";
 
 import { CurrentUserContext } from "../utils/UserContext";
 import { useContext } from "react";
+import { useTheme } from "@mui/material";
 
 export default function Navbar() {
+  const theme = useTheme();
   const { currentUser, logoutUser } = useContext(CurrentUserContext);
+
+  const navLinkStyle = {
+    color: "#ccc", // Light gray color for inactive links
+    textDecoration: "none",
+    borderBottom: "2px solid transparent",
+    borderRadius: "0px",
+    padding: "20px",
+    "&:hover": {
+      color: "#1976d2", // Change color on hover
+    },
+    "&.active": {
+      color: "#fff", // White color for active link
+      borderBottomColor: theme.palette.secondary.main, // Red line underneath active link
+    },
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -30,10 +47,17 @@ export default function Navbar() {
               to="/companies"
               size="large"
               color="inherit"
+              sx={navLinkStyle}
             >
               Companies
             </Button>
-            <Button component={NavLink} to="/jobs" size="large" color="inherit">
+            <Button
+              component={NavLink}
+              to="/jobs"
+              size="large"
+              color="inherit"
+              sx={navLinkStyle}
+            >
               Jobs
             </Button>
             {currentUser ? (
@@ -42,6 +66,7 @@ export default function Navbar() {
                 to="/profile"
                 size="large"
                 color="inherit"
+                sx={navLinkStyle}
               >
                 Profile
               </Button>
@@ -56,6 +81,7 @@ export default function Navbar() {
                 component={NavLink}
                 size="large"
                 color="inherit"
+                sx={navLinkStyle}
               >
                 {`Logout ${currentUser.username}`}
               </Button>
@@ -65,6 +91,7 @@ export default function Navbar() {
                 to="/login"
                 size="large"
                 color="inherit"
+                sx={navLinkStyle}
               >
                 Login
               </Button>

@@ -24,6 +24,7 @@ export const FormInputPassword = ({ name, control, label, errors }) => {
       rules={registerOptions[name]}
       render={({ field }) => (
         <TextField
+          size="small"
           label={label}
           {...field}
           error={!!errors[name]}

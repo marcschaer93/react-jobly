@@ -10,13 +10,12 @@ export const Home = () => {
   const theme = useTheme();
   const { currentUser } = useContext(CurrentUserContext);
 
-  const backgroundImageUrl = "/src/assets/cropped.jpeg"; // Path to your image (relative to the public directory)
+  const backgroundImageUrl = "/src/assets/cropped.png"; // Path to your image (relative to the public directory)
 
   const containerStyle = {
     width: "100vw",
     height: "100vh",
-    backgroundColor: "#26bdd0",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#89CFF0",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
