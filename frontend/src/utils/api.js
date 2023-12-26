@@ -58,6 +58,12 @@ class JoblyApi {
     return res.jobs;
   }
 
+  static async filterJobs(searchTerm) {
+    let res = await this.request(`jobs?title=${searchTerm}`);
+    console.log("response filter jobs", res.jobs);
+    return res.jobs;
+  }
+
   static async loginUser(username, password) {
     let res = await this.request(`auth/token`, { username, password }, "post");
     // this.token = res.token; // Set the token in the class upon successful login

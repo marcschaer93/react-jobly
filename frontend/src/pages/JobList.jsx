@@ -23,9 +23,21 @@ import { CurrentUserContext } from "../utils/UserContext";
  *
  */
 
-export const JobList = ({ jobs }) => {
+export const JobList = ({ jobs, filter }) => {
   const navigate = useNavigate();
-  if (!jobs) return navigate("/jobs");
+  // if (!jobs) return navigate("/jobs");
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  useEffect(() => {
+    filter({ searchTerm });
+  }, [searchTerm]);
+
+  console.log("jobs", jobs);
 
   return (
     <Box
@@ -37,10 +49,8 @@ export const JobList = ({ jobs }) => {
         pt: "50px",
       }}
     >
-      <SearchBar />
-      {/* <Typography sx={{ textAlign: "center" }} variant="h4">
-        Job List
-      </Typography> */}
+      <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
+
       {jobs && jobs.length > 0 ? (
         <Box
           component="ul"

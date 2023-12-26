@@ -16,15 +16,22 @@ import { useJobData } from "../hooks/useJobData";
 
 export const AppRoutes = () => {
   const theme = useTheme();
+  /* Get filtered Job and Company Data. 
+  Now, it's just filtered by searchTerm, but I added the filter state to make it easier, to add other filters later */
   const [companyFilter, setCompanyFilter] = useState({ searchTerm: "" });
+  const [jobFilter, setJobFilter] = useState({ searchTerm: "" });
 
   const { companies, isLoading: companiesLoading } =
     useCompanyData(companyFilter);
 
-  const { jobs, isLoading: jobsLoading } = useJobData();
+  const { jobs, isLoading: jobsLoading } = useJobData(jobFilter);
 
   const getCompanyFilter = (filter) => {
     setCompanyFilter(filter);
+  };
+
+  const getJobFilter = (filter) => {
+    setJobFilter(filter);
   };
 
   if (companiesLoading || jobsLoading) return <h1>Loading...</h1>;
@@ -47,7 +54,10 @@ export const AppRoutes = () => {
         />
       </Route>
 
-      <Route path="/jobs" element={<JobList jobs={jobs} />} />
+      <Route
+        path="/jobs"
+        element={<JobList jobs={jobs} filter={getJobFilter} />}
+      />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );

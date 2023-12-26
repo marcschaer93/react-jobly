@@ -6,16 +6,16 @@ export const useCompanyData = (filter) => {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { searchTerm } = filter;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (filter.searchTerm === "") {
+        if (searchTerm === "") {
           const allCompanies = await JoblyApi.getAllCompanies();
           setCompanies(allCompanies);
         } else {
-          const filteredCompanies = await JoblyApi.filterCompanies(
-            filter.searchTerm
-          );
+          const filteredCompanies = await JoblyApi.filterCompanies(searchTerm);
           setCompanies(filteredCompanies);
         }
         setIsLoading(false);

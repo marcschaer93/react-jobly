@@ -15,13 +15,13 @@ import JoblyApi from "../utils/api";
 
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
-  console.log("jobData", jobData);
+  //   console.log("jobData", jobData);
 
   const { currentUser, userToken, setCurrentUser } =
     useContext(CurrentUserContext);
 
   const appliedJobIds = currentUser ? currentUser.applications : [""];
-  console.log("appliedJobs", appliedJobIds);
+  //   console.log("appliedJobs", appliedJobIds);
 
   const [applied, setApplied] = useState(false);
 
