@@ -1,5 +1,3 @@
-//** Company Overview to use as list elements in CompanyList */
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,8 +5,14 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
-
 import { Link } from "react-router-dom";
+
+/**
+ * Company Overview component used as list elements in CompanyList.
+ *
+ * @param {Object} companyData - Company data object containing details.
+ * @returns {JSX.Element} - Displays company name, description, and a 'Learn More' button.
+ */
 
 export const CompanyOverview = ({ companyData }) => {
   const theme = useTheme();

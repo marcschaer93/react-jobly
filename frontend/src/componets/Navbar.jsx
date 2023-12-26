@@ -1,16 +1,22 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
+import { useTheme } from "@mui/material";
+import React, { useContext } from "react";
 
 import { CurrentUserContext } from "../utils/UserContext";
-import { useContext } from "react";
-import { useTheme } from "@mui/material";
+
+/**
+ * Navbar Component
+ *
+ * Renders a navigation bar with links based on user authentication status.
+ * Utilizes NavLink for routing and CurrentUserContext for user-related data.
+ *
+ * @returns {JSX.Element} - A navigation bar component with dynamic links based on user authentication.
+ */
 
 export default function Navbar() {
   const theme = useTheme();

@@ -1,14 +1,11 @@
-import React from "react";
-import { useContext } from "react";
-import { useNavigate, Navigate, Link } from "react-router-dom";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Typography, Box } from "@mui/material";
-
-import { FormInputUsername } from "./form/FormInputUsername";
-import { FormInputPassword } from "./form/FormInputPassword";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../utils/UserContext";
-
+import { FormInputUsername } from "./form/FormInputUsername";
+import { FormInputPassword } from "./form/FormInputPassword";
 import {
   formContainer,
   titleContainer,
@@ -21,6 +18,15 @@ import {
   lostPasswordContainer,
   submitButton,
 } from "../styles/formStyles";
+
+/**
+ * LoginForm Component
+ *
+ * Renders a login form allowing users to enter their credentials for authentication.
+ * Utilizes React Hook Form for form handling and validation.
+ *
+ * @returns {JSX.Element} - A login form component with username, password inputs, and submit button.
+ */
 
 export const LoginForm = () => {
   const { setCurrentUser, currentUser, loginUser } =

@@ -1,22 +1,19 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material";
-
 import { useParams, useNavigate } from "react-router-dom";
+
 import { JobCard } from "./JobCard";
 
-/** Shows Details, content and available Jobs of a Company
+/**
+ * Renders a Company Card displaying Company Details and available Jobs.
+ * Redirects to the Company List if the company is not found.
  *
- * Props: companies
- *
- * State:
- * - snacks: list of snack data objs -- populated via AJAX call
- * - drinks: same, but for drinks
- * - isLoading: bool, has data loaded yet?
- *
+ * @param {Object[]} companies - List of company data objects.
+ * @param {Object[]} jobs - List of job data objects.
+ * @returns {JSX.Element} - Company details and job information in a card format.
  */
 
 export const CompanyCard = ({ companies, jobs }) => {

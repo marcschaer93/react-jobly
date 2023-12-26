@@ -4,6 +4,16 @@ import { CompanyOverview } from "../componets/CompanyOverview";
 import { SearchBar } from "../componets/ui/searchBar";
 import { useState, useEffect } from "react";
 
+/**
+ * CompanyList Component
+ *
+ * Renders a list of companies along with a search bar to filter companies.
+ *
+ * @param {Object[]} companies - List of company data
+ * @param {Function} filter - Function to filter companies based on search term
+ * @returns {JSX.Element} - Company list along with search bar for filtering
+ */
+
 export const CompanyList = ({ companies, filter }) => {
   const [searchTerm, setSearchterm] = useState("");
 

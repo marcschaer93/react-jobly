@@ -125,13 +125,6 @@ class JoblyApi {
   }
 }
 
-// ** PATCH /[username] { user } => { user }
-//  *
-//  * Data can include:
-//  *   { firstName, lastName, password, email }
-//  *
-//  * Returns { username, firstName, lastName, email, isAdmin }
-
 export default JoblyApi;
 
 // for now, put token ("testuser" / "password" on class)

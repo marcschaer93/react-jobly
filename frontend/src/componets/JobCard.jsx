@@ -1,27 +1,31 @@
-import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
-
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
-
-import { ApplyButton } from "./ui/ApplyButton";
-
-import { useNavigate, useParams } from "react-router-dom";
+import CardContent from "@mui/material/CardContent";
 import { useState, useEffect, useContext } from "react";
 
-import { CurrentUserContext } from "../utils/UserContext";
 import JoblyApi from "../utils/api";
+import { ApplyButton } from "./ui/ApplyButton";
+import { CurrentUserContext } from "../utils/UserContext";
+
+/**
+ * JobCard Component
+ *
+ * Renders job details and handles the application process for a specific job.
+ * Utilizes context, API requests, and state for handling job application status.
+ *
+ * @param {object} jobData - The data object containing job details.
+ * @returns {JSX.Element} - Card displaying job details and an apply button.
+ */
 
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
-  //   console.log("jobData", jobData);
 
   const { currentUser, userToken, setCurrentUser } =
     useContext(CurrentUserContext);
 
   const appliedJobIds = currentUser ? currentUser.applications : [""];
-  //   console.log("appliedJobs", appliedJobIds);
 
   const [applied, setApplied] = useState(false);
 

@@ -1,8 +1,19 @@
-import { Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Controller } from "react-hook-form";
 import { registerOptions } from "../../utils/registrOptions";
+
+/**
+ * FormInputText Component
+ *
+ * Renders a text input field within a form, using the react-hook-form Controller for controlled input handling.
+ *
+ * @param {string} name - The name of the input field.
+ * @param {object} control - The control object from react-hook-form.
+ * @param {string} label - The label for the input field.
+ * @param {object} errors - The errors object containing validation errors.
+ * @param {boolean} [disabled=false] - Determines if the input field is disabled or not.
+ * @returns {JSX.Element} - A text input field with controlled behavior, following the provided input configurations.
+ */
 
 export const FormInputText = ({
   name,
@@ -26,13 +37,6 @@ export const FormInputText = ({
           variant="outlined"
           fullWidth
           disabled={disabled}
-          //   InputProps={{
-          //     startAdornment: (
-          //       <InputAdornment position="start">
-          //         <AccountCircle style={{ color: "black" }} />
-          //       </InputAdornment>
-          //     ),
-          //   }}
         />
       )}
     />

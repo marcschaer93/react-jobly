@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useTheme } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Typography, Box } from "@mui/material";
 
-import { FormInputText } from "./form/FormInputText";
-
 import JoblyApi from "../utils/api";
-import { useContext } from "react";
+import { FormInputText } from "./form/FormInputText";
 import { CurrentUserContext } from "../utils/UserContext";
-import { useNavigate, Link } from "react-router-dom";
-import { useTheme } from "@mui/material";
-
 import {
   formContainer,
   titleContainer,
@@ -21,6 +18,15 @@ import {
   link,
   submitButton,
 } from "../styles/formStyles";
+
+/**
+ * RegisterForm Component
+ *
+ * Renders a registration form allowing users to sign up.
+ * Utilizes useForm for form control and validation, CurrentUserContext for user-related actions, and JoblyApi for registration.
+ *
+ * @returns {JSX.Element} - A registration form component with input fields for username, password, first name, last name, and email.
+ */
 
 export const RegisterForm = () => {
   const theme = useTheme();

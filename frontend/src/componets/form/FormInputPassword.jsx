@@ -8,6 +8,19 @@ import { useState } from "react";
 import KeyIcon from "@mui/icons-material/Key";
 import { registerOptions } from "../../utils/registrOptions";
 
+/**
+ * FormInputPassword Component
+ *
+ * Renders a password input field within a form, providing options to toggle password visibility.
+ * Utilizes react-hook-form Controller for controlled form input handling.
+ *
+ * @param {string} name - The name of the input field.
+ * @param {object} control - The control object from react-hook-form.
+ * @param {string} label - The label for the input field.
+ * @param {object} errors - The errors object containing validation errors.
+ * @returns {JSX.Element} - A password input field with options to show/hide password and validation error display.
+ */
+
 export const FormInputPassword = ({ name, control, label, errors }) => {
   const [showPassword, setShowPassword] = useState(false);
 

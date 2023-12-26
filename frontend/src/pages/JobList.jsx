@@ -10,17 +10,19 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
 
-/* Shows a List with all Jobs
+/**
+ * JobList Component
  *
- * - SearchBar on Top
+ * Displays a list of jobs and includes a search bar to filter jobs by a search term.
  *
- * Props: jobs
+ * Props:
+ * - jobs: Array of job objects
+ * - filter: Function to handle filtering jobs
  *
  * State:
- * -
- * -
- * -
+ * - searchTerm: String representing the search term
  *
+ * @returns {JSX.Element} - List of jobs with a search bar
  */
 
 export const JobList = ({ jobs, filter }) => {

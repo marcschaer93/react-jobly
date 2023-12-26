@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
 import JoblyApi from "../utils/api";
 
-// Custom hook for fetching jobs
+/**
+ * useCompanyData Hook
+ *
+ * Fetches and filters company data based on the provided search term.
+ * Uses JoblyApi for data fetching and filtering.
+ *
+ * @param {Object} filter - Contains the search term for filtering companies
+ * @param {string} filter.searchTerm - Search term used to filter companies
+ * @returns {Object} - Contains companies data and loading state
+ *                    - {Array} companies - List of companies based on the filter
+ *                    - {boolean} isLoading - Loading state for data fetching
+ */
+
 export const useJobData = (filter) => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

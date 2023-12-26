@@ -1,10 +1,18 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material";
 import { Button, Box, Typography } from "@mui/material";
 
 import { CurrentUserContext } from "../utils/UserContext";
-import { useTheme } from "@mui/material";
-import { useContext } from "react";
 
-import { Link } from "react-router-dom";
+/**
+ * Home Component
+ *
+ * Renders the landing page of the application.
+ * Displays a welcome message if a user is logged in, otherwise, shows a message prompting login and a button to navigate to the login page.
+ *
+ * @returns {JSX.Element} - Landing page content
+ */
 
 export const Home = () => {
   const theme = useTheme();

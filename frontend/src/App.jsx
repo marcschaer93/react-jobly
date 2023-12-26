@@ -1,65 +1,35 @@
-import "./App.css";
-
+import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 
+import "./App.css";
+import JoblyApi from "./utils/api";
+import Navbar from "./componets/Navbar";
 import { theme } from "/src/utils/theme.js";
+import { AppRoutes } from "./componets/AppRoutes";
 import { CurrentUserContext } from "./utils/UserContext";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import Navbar from "./componets/Navbar";
-import { AppRoutes } from "./componets/AppRoutes";
-
-import JoblyApi from "./utils/api";
-
 /**
- * The main component managing user authentication and data for the entire application.
- * Handles user login, logout, and context management for user-related data.
+ * App Functionality Overview:
+ *
+ * - **Routing and Navigation**: Handles URL-based navigation using React Router, directing users to different pages/components.
+ * - **User Authentication**: Manages user login/logout states by storing tokens in local storage, facilitating persistent sessions.
+ * - **Global User Context**: Provides user-related data and actions via `CurrentUserContext.Provider` for widespread access.
+ * - **Material-UI Theming**: Utilizes Material-UI's `ThemeProvider` for consistent styling across the application.
+ * - **Data Fetching and Filtering**: Retrieves and filters company and job data using dedicated hooks (`useCompanyData`, `useJobData`).
+ * - **Modular Component Design**: Uses modular components for improved maintainability and scalability.
+ * - **Loading State Handling**: Displays loading indicators while fetching data to enhance user experience.
+ * - **Error Logging and Handling**: Captures and logs errors during data retrieval or authentication for debugging.
+ * - **Responsive UI**: Utilizes Material-UI components for building responsive and intuitive user interfaces.
+ * - **Centralized Application Entry**: Acts as the central entry point, controlling core functionalities of the app.
  */
 
 function App() {
-  // const useLocalStorageToken = (key) => {
-  //   const [token, setToken] = useState(() => {
-  //     const storedToken = localStorage.getItem(key);
-  //     return storedToken || null;
-  //   });
-
-  //   useEffect(() => {
-  //     if (token !== null && token !== undefined) {
-  //       localStorage.setItem(key, token);
-  //     } else {
-  //       localStorage.removeItem(key);
-  //     }
-  //   }, [key, token]);
-
-  //   return [token, setToken];
-  // };
-  // const [userToken, setUserToken] = useLocalStorageToken("token");
-
   const [currentUser, setCurrentUser] = useState(null);
   const [userToken, setUserToken] = useState(() => {
     const storedToken = localStorage.getItem("token");
     return storedToken || null;
   });
-
-  // const [userToken, setUserToken] = useState(null);
-
-  // useEffect(() => {
-  //   const loggedInUserToken = localStorage.getItem("token");
-
-  //   if (loggedInUserToken) {
-  //     try {
-  //       const token = JSON.parse(loggedInUserToken);
-  //       console.log("token", token);
-  //       setUserToken(token);
-  //     } catch (error) {
-  //       console.error("Error parsing token:", error);
-  //       // Handle the error here, such as setting default token or showing an error message.
-  //     }
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (!userToken) {
@@ -78,24 +48,6 @@ function App() {
     };
     fetchData();
   }, [userToken]);
-
-  // useEffect(() => {
-  //   if (userToken) {
-  //     const fetchData = async () => {
-  //       try {
-  //         const userData = await JoblyApi.getUserData(userToken);
-  //         setCurrentUser(userData);
-  //         console.log("data$", userData);
-  //       } catch (error) {
-  //         console.error("Error fetching user data:", error);
-  //       }
-  //     };
-
-  //     fetchData();
-  //   } else {
-  //     setCurrentUser(null);
-  //   }
-  // }, [userToken, setCurrentUser]);
 
   const loginUser = async (username, password) => {
     try {

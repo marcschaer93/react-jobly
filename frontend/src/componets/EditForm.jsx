@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Button, Typography, Box } from "@mui/material";
-import { TextField } from "@mui/material";
-
-import "./LoginForm.css";
-
-import { FormInputText } from "./form/FormInputText";
 
 import JoblyApi from "../utils/api";
-import { useContext } from "react";
+import { FormInputText } from "./form/FormInputText";
 import { CurrentUserContext } from "../utils/UserContext";
-import { useNavigate, Navigate } from "react-router-dom";
 
 import {
   formContainer,
@@ -24,6 +19,15 @@ import {
   lostPasswordContainer,
   submitButton,
 } from "../styles/formStyles";
+
+/**
+ * EditForm Component
+ *
+ * Renders a form to edit user profile details like username, first name, last name, and email.
+ * Utilizes useContext, useForm hooks for form handling, and user authentication data.
+ *
+ * @returns {JSX.Element} - Form for editing user profile.
+ */
 
 export const EditForm = () => {
   const { currentUser, setCurrentUser, userToken } =
