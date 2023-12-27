@@ -15,10 +15,11 @@ export const ViewMoreButton = ({ handleViewMore }) => {
   return (
     <Button
       onClick={handleViewMore}
-      variant="contained"
+      variant="text"
       color="primary"
       type="submit"
-      size="medium"
+      size="large"
+      fullWidth
       sx={{
         display: "flex",
         justifyContent: "center",

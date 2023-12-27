@@ -18,9 +18,9 @@ export const SalarySelect = ({ salary, handleChange }) => {
           onChange={handleChange}
           size="small"
           name="minSalary"
-          defaultValue={""}
+          defaultValue=""
         >
-          <MenuItem value={""}>All</MenuItem>
+          {/* <MenuItem value={""}>All</MenuItem> */}
           <MenuItem value={80000}>80'000</MenuItem>
           <MenuItem value={120000}>120'000</MenuItem>
           <MenuItem value={150000}>150'000</MenuItem>

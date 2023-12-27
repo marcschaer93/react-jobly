@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { JobCard } from "./JobCard";
+import { cardContent, cardSmall, card } from "../styles/cardStyles";
 
 /**
  * Renders a Company Card displaying Company Details and available Jobs.
@@ -39,12 +40,12 @@ export const CompanyCard = ({ companies, jobs }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          mt: "50px",
           width: "100%",
         }}
       >
-        <Card sx={{ width: "70vW" }}>
-          {" "}
-          <CardContent>
+        <Card sx={card}>
+          <CardContent sx={cardContent}>
             <Typography
               sx={{ fontSize: "2rem" }}
               color="text.secondary"
@@ -67,7 +68,16 @@ export const CompanyCard = ({ companies, jobs }) => {
           </CardContent>
           <Box>
             {companyJobs && companyJobs.length > 0 ? (
-              <Box component="ul" sx={{ listStyle: "none" }}>
+              <Box
+                component="ul"
+                sx={{
+                  listStyle: "none",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "25px",
+                  width: "60vW",
+                }}
+              >
                 {companyJobs.map((j) => (
                   <Box component="li" key={j.id}>
                     {<JobCard jobData={j} />}

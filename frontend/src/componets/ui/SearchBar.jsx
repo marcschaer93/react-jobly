@@ -4,6 +4,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
+import { alpha } from "@mui/system";
+import { useTheme } from "@mui/material";
 
 /**
  * SearchBar Component
@@ -16,6 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
  */
 
 export const SearchBar = ({ searchTerm, handleChange }) => {
+  const theme = useTheme();
   return (
     <Box
       autoComplete="off"
@@ -31,7 +34,14 @@ export const SearchBar = ({ searchTerm, handleChange }) => {
           onChange={handleChange}
           size="small"
           fullWidth
-          sx={{ width: "50vW", borderRadius: "16px" }}
+          sx={{
+            width: "50vW",
+            // borderRadius: "16px",
+            backgroundColor: alpha(theme.palette.primary.main, 0.15),
+            "&:hover": {
+              backgroundColor: alpha(theme.palette.primary.main, 0.25),
+            },
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

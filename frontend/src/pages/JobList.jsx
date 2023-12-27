@@ -158,29 +158,33 @@ export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        gap: "25px",
+        gap: "15px",
+        borderTop: "1px black solid",
         pt: "50px",
       }}
     >
-      <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-      <Box
-        sx={{
-          display: "flex",
-          gap: "40px",
-          marginRight: "420px",
-        }}
-      >
-        <SalarySelect salary={minSalary} handleChange={handleChange} />
-        <FormControlLabel
-          control={
-            <Checkbox
-              name="hasEquity"
-              onChange={handleChange}
-              value={hasEquity}
-            />
-          }
-          label="Equity"
-        />
+      <Box>
+        <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
+        <Box
+          sx={{
+            // backgroundColor: "#89CFF0",
+            display: "flex",
+            gap: "40px",
+            marginRight: "420px",
+          }}
+        >
+          <SalarySelect salary={minSalary} handleChange={handleChange} />
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="hasEquity"
+                onChange={handleChange}
+                value={hasEquity}
+              />
+            }
+            label="Equity"
+          />
+        </Box>
       </Box>
       {visibleJobs && visibleJobs.length > 0 ? (
         <>
@@ -189,7 +193,7 @@ export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "30px",
+              gap: "25px",
               listStyle: "none",
             }}
           >

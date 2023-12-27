@@ -58,7 +58,15 @@ export const CompanyList = ({ companies, onFilterChange, companyFilter }) => {
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
       {visibleCompanies && visibleCompanies.length > 0 ? (
         <>
-          <Box component="ul" sx={{ listStyle: "none" }}>
+          <Box
+            component="ul"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "25px",
+              listStyle: "none",
+            }}
+          >
             {visibleCompanies.map((c) => (
               <Box component="li" key={c.handle}>
                 <CompanyOverview companyData={c} />

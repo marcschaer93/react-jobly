@@ -7,6 +7,7 @@ import { useState, useEffect, useContext } from "react";
 
 import JoblyApi from "../utils/api";
 import { ApplyButton } from "./ui/ApplyButton";
+import { card, cardContainer, cardContent } from "../styles/cardStyles";
 import { CurrentUserContext } from "../utils/UserContext";
 
 /**
@@ -55,21 +56,14 @@ export const JobCard = ({ jobData }) => {
     );
   }
 
-  const { title, salary, equity, companyName } = jobData;
+  const { title, salary, equity, companyName, logoUrl } = jobData;
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <Card sx={{ width: "50vW" }}>
+      <Box sx={cardContainer}>
+        <Card sx={card}>
           {" "}
-          <CardContent>
+          <CardContent sx={cardContent}>
             <Typography variant="h5" color="text.secondary" gutterBottom>
               {title}
             </Typography>
@@ -77,9 +71,9 @@ export const JobCard = ({ jobData }) => {
               {companyName}
             </Typography>
             <Typography variant="h5" component="div"></Typography>
-            {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            <Typography sx={{ mb: 1.5 }} color="black">
               {logoUrl ? logoUrl : null}
-            </Typography> */}
+            </Typography>
             <Typography variant="body2">
               {salary ? (
                 <div>
@@ -104,7 +98,7 @@ export const JobCard = ({ jobData }) => {
             </Typography>
           </CardContent>
           {currentUser ? (
-            <Box sx={{ textAlign: "right", mr: "25px", mb: "25px" }}>
+            <Box sx={{ textAlign: "right", mr: "35px", mb: "35px" }}>
               <ApplyButton applyJob={applyJob} applied={applied} />
             </Box>
           ) : (

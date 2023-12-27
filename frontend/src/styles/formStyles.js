@@ -61,9 +61,8 @@ const formStyles = {
     justifyContent: "left",
     color: "#797979",
     fontSize: "12px",
-    paddingLeft: "5px",
     cursor: "pointer",
-    marginLeft: "60px",
+    marginLeft: "50px",
     marginTop: "5px",
   },
   link: {
