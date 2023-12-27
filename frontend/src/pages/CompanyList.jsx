@@ -16,17 +16,19 @@ import { Typography } from "@mui/material";
  * @returns {JSX.Element} - Company list along with search bar for filtering
  */
 
-export const CompanyList = ({ companies, filterCompanies }) => {
-  const [searchTerm, setSearchterm] = useState("");
+export const CompanyList = ({ companies, onFilterChange, companyFilter }) => {
   const [visibleCompanies, setVisibleCompanies] = useState([]);
+  const { searchTerm } = companyFilter;
 
   const handleChange = (e) => {
-    setSearchterm(e.target.value);
-  };
+    const { value, name } = e.target;
+    const updatedFilter = {
+      ...companyFilter,
+      [name]: value,
+    };
 
-  useEffect(() => {
-    filterCompanies({ searchTerm });
-  }, [searchTerm]);
+    onFilterChange(updatedFilter, "companies");
+  };
 
   useEffect(() => {
     if (companies) {

@@ -50,9 +50,6 @@ export const useJobData = (filter) => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("filter", filter);
-  //   const { searchTerm, minSalary, hasEquity } = filter;
-
   useEffect(() => {
     const fetchData = async () => {
       try {

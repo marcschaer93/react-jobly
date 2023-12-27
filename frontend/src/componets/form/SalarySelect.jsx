@@ -17,13 +17,12 @@ export const SalarySelect = ({ salary, handleChange }) => {
           label="Salary"
           onChange={handleChange}
           size="small"
+          name="minSalary"
         >
-          <MenuItem value={30000}>30'000</MenuItem>
-          <MenuItem value={60000}>60'000</MenuItem>
           <MenuItem value={80000}>80'000</MenuItem>
-          <MenuItem value={100000}>100'000</MenuItem>
           <MenuItem value={120000}>120'000</MenuItem>
           <MenuItem value={150000}>150'000</MenuItem>
+          <MenuItem value={180000}>180'000</MenuItem>
         </Select>
       </FormControl>
     </Box>

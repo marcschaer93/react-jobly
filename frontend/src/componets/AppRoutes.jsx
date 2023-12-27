@@ -26,25 +26,37 @@ export const AppRoutes = () => {
   const theme = useTheme();
   /* Get filtered Job and Company Data. 
   Now, it's just filtered by searchTerm, but I added the filter state to make it easier, to add other filters later */
-  const [companyFilter, setCompanyFilter] = useState({ searchTerm: "" });
-  const [jobFilter, setJobFilter] = useState({
-    searchTerm: "",
-    minSalary: "",
-    hasEquity: false,
+  // const [companyFilter, setCompanyFilter] = useState({ searchTerm: "" });
+  // const [jobFilter, setJobFilter] = useState({
+  //   searchTerm: "",
+  //   minSalary: "",
+  //   hasEquity: false,
+  // });
+  const [filter, setFilter] = useState({
+    jobs: { searchTerm: "", minSalary: "", hasEquity: false },
+    companies: { searchTerm: "" },
   });
-  // const [jobFilter, setJobFilter] = useState(null);
 
-  const { companies, isLoading: companiesLoading } =
-    useCompanyData(companyFilter);
+  const { companies, isLoading: companiesLoading } = useCompanyData(
+    filter.companies
+  );
 
-  const { jobs, isLoading: jobsLoading } = useJobData(jobFilter);
+  const { jobs, isLoading: jobsLoading } = useJobData(filter.jobs);
 
-  const getCompanyFilter = (filter) => {
-    setCompanyFilter(filter);
-  };
+  // const handleCompanyFilterChange = (newFilter) => {
+  //   setCompanyFilter(newFilter);
+  // };
 
-  const getJobFilter = (filter) => {
-    setJobFilter(filter);
+  // const handleJobFilterChange = (newFilter) => {
+  //   // setJobFilter(newFilter);
+  //   setFilter((currentFilter) => ({ ...currentFilter, newFilter }));
+  // };
+
+  const handleFilterChange = (newFilter, dataType) => {
+    setFilter((currentFilter) => ({
+      ...currentFilter,
+      [dataType]: { ...currentFilter[dataType], ...newFilter },
+    }));
   };
 
   if (companiesLoading || jobsLoading) return <h1>Loading...</h1>;
@@ -59,7 +71,8 @@ export const AppRoutes = () => {
           element={
             <CompanyList
               companies={companies}
-              filterCompanies={getCompanyFilter}
+              onFilterChange={handleFilterChange}
+              companyFilter={filter.companies}
             />
           }
         />
@@ -70,7 +83,14 @@ export const AppRoutes = () => {
       </Route>
       <Route
         path="/jobs"
-        element={<JobList jobs={jobs} filterJobs={getJobFilter} />}
+        element={
+          <JobList
+            jobs={jobs}
+            onFilterChange={handleFilterChange}
+            // jobFilter={jobFilter}
+            jobFilter={filter.jobs}
+          />
+        }
       />
       <Route path="/profile" element={<Profile />} />
     </Routes>

@@ -29,26 +29,116 @@ import { SalarySelect } from "../componets/form/SalarySelect";
  * @returns {JSX.Element} - List of jobs with a search bar
  */
 
-export const JobList = ({ jobs, filterJobs }) => {
-  const navigate = useNavigate();
-  // if (!jobs) return navigate("/jobs");
+// export const JobList = ({ jobs, filterJobs }) => {
+//   const navigate = useNavigate();
+//   // if (!jobs) return navigate("/jobs");
+//   const [visibleJobs, setVisibleJobs] = useState("");
+
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [minSalary, setMinSalary] = useState("");
+//   const [hasEquity, setHasEquity] = useState(false);
+
+//   const handleSearchTermChange = (e) => {
+//     setSearchTerm(e.target.value);
+//   };
+
+//   const handleSalaryChange = (e) => {
+//     setMinSalary(e.target.value);
+//   };
+
+//   useEffect(() => {
+//     filterJobs({ searchTerm, minSalary, hasEquity });
+//   }, [searchTerm, minSalary, hasEquity]);
+
+//   useEffect(() => {
+//     if (jobs) {
+//       setVisibleJobs(jobs.slice(0, 10));
+//     }
+//   }, [jobs]);
+
+//   const handleViewMore = () => {
+//     if (jobs) {
+//       const nextJobs = jobs.slice(visibleJobs.length, visibleJobs.length + 10);
+//       setVisibleJobs((current) => [...current, ...nextJobs]);
+//     }
+//   };
+
+//   const handleEquityChange = () => {
+//     setHasEquity((hasEquity) => !hasEquity);
+//   };
+
+//   return (
+//     <Box
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         flexDirection: "column",
+//         gap: "25px",
+//         pt: "50px",
+//       }}
+//     >
+//       <SearchBar
+//         searchTerm={searchTerm}
+//         handleChange={handleSearchTermChange}
+//       />
+//       <SalarySelect salary={minSalary} handleChange={handleSalaryChange} />
+//       <FormControlLabel
+//         control={<Checkbox onChange={handleEquityChange} value={hasEquity} />}
+//         label="Equity"
+//       />
+
+//       {visibleJobs && visibleJobs.length > 0 ? (
+//         <>
+//           <Box
+//             component="ul"
+//             sx={{
+//               display: "flex",
+//               flexDirection: "column",
+//               gap: "30px",
+//               listStyle: "none",
+//             }}
+//           >
+//             {visibleJobs.map((j) => (
+//               <Box component="li" key={j.id}>
+//                 {<JobCard jobData={j} />}
+//               </Box>
+//             ))}
+//           </Box>
+//           <Box>
+//             <ViewMoreButton handleViewMore={handleViewMore} />
+//           </Box>
+//         </>
+//       ) : (
+//         <Box
+//           sx={{
+//             display: "flex",
+//             textAlign: "center",
+//             justifyContent: "center",
+//           }}
+//         >
+//           <Typography sx={{ fontSize: "1.2rem" }} variant="body">
+//             No jobs available
+//           </Typography>
+//         </Box>
+//       )}
+//     </Box>
+//   );
+// };
+
+export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
   const [visibleJobs, setVisibleJobs] = useState("");
+  console.log(jobFilter);
+  const { searchTerm, minSalary, hasEquity } = jobFilter;
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [minSalary, setMinSalary] = useState("");
-  const [hasEquity, setHasEquity] = useState(false);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
 
-  const handleSearchTermChange = (e) => {
-    setSearchTerm(e.target.value);
+    const updatedFilter = {
+      ...jobFilter,
+      [name]: type === `checkbox` ? checked : value,
+    };
+    onFilterChange(updatedFilter, "jobs");
   };
-
-  const handleSalaryChange = (e) => {
-    setMinSalary(e.target.value);
-  };
-
-  useEffect(() => {
-    filterJobs({ searchTerm, minSalary, hasEquity });
-  }, [searchTerm, minSalary, hasEquity]);
 
   useEffect(() => {
     if (jobs) {
@@ -63,10 +153,6 @@ export const JobList = ({ jobs, filterJobs }) => {
     }
   };
 
-  const handleEquityChange = () => {
-    setHasEquity((hasEquity) => !hasEquity);
-  };
-
   return (
     <Box
       sx={{
@@ -77,13 +163,16 @@ export const JobList = ({ jobs, filterJobs }) => {
         pt: "50px",
       }}
     >
-      <SearchBar
-        searchTerm={searchTerm}
-        handleChange={handleSearchTermChange}
-      />
-      <SalarySelect salary={minSalary} handleChange={handleSalaryChange} />
+      <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
+      <SalarySelect salary={minSalary} handleChange={handleChange} />
       <FormControlLabel
-        control={<Checkbox onChange={handleEquityChange} value={hasEquity} />}
+        control={
+          <Checkbox
+            name="hasEquity"
+            onChange={handleChange}
+            value={hasEquity}
+          />
+        }
         label="Equity"
       />
 
@@ -124,6 +213,3 @@ export const JobList = ({ jobs, filterJobs }) => {
     </Box>
   );
 };
-
-// * - minSalary
-// * - hasEquity (true returns only jobs with equity > 0, other values ignored)

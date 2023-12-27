@@ -27,6 +27,7 @@ export const SearchBar = ({ searchTerm, handleChange }) => {
         <InputLabel htmlFor="input-with-icon-adornment"></InputLabel>
         <TextField
           value={searchTerm}
+          name="searchTerm"
           onChange={handleChange}
           size="small"
           fullWidth
