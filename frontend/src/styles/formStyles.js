@@ -2,8 +2,13 @@ const formStyles = {
   formContainer: {
     width: "600px",
     margin: "auto",
-    paddingBottom: "30px",
-    marginTop: "30px",
+    padding: "20px",
+    paddingBottom: "50px",
+    marginTop: "60px",
+    border: "solid #CCCCCC 1px",
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+    borderRadius: "16px",
+    backgroundColor: "#FFFFFF",
   },
   titleContainer: {
     display: "flex",

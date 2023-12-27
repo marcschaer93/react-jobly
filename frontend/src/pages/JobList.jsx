@@ -127,7 +127,6 @@ import { SalarySelect } from "../componets/form/SalarySelect";
 
 export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
   const [visibleJobs, setVisibleJobs] = useState("");
-  console.log(jobFilter);
   const { searchTerm, minSalary, hasEquity } = jobFilter;
 
   const handleChange = (e) => {
@@ -137,7 +136,7 @@ export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
       ...jobFilter,
       [name]: type === `checkbox` ? checked : value,
     };
-    onFilterChange(updatedFilter, "jobs");
+    onFilterChange(updatedFilter, "jobFilter");
   };
 
   useEffect(() => {
@@ -164,18 +163,25 @@ export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
       }}
     >
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-      <SalarySelect salary={minSalary} handleChange={handleChange} />
-      <FormControlLabel
-        control={
-          <Checkbox
-            name="hasEquity"
-            onChange={handleChange}
-            value={hasEquity}
-          />
-        }
-        label="Equity"
-      />
-
+      <Box
+        sx={{
+          display: "flex",
+          gap: "40px",
+          marginRight: "420px",
+        }}
+      >
+        <SalarySelect salary={minSalary} handleChange={handleChange} />
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="hasEquity"
+              onChange={handleChange}
+              value={hasEquity}
+            />
+          }
+          label="Equity"
+        />
+      </Box>
       {visibleJobs && visibleJobs.length > 0 ? (
         <>
           <Box

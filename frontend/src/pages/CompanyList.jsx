@@ -27,7 +27,7 @@ export const CompanyList = ({ companies, onFilterChange, companyFilter }) => {
       [name]: value,
     };
 
-    onFilterChange(updatedFilter, "companies");
+    onFilterChange(updatedFilter, "companyFilter");
   };
 
   useEffect(() => {

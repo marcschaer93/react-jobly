@@ -53,7 +53,7 @@ class JoblyApi {
   //   return res.companies;
   // }
 
-  static async getCompanies(searchTerm) {
+  static async getCompanies({ searchTerm = "" }) {
     let endpoint = "companies";
 
     if (searchTerm !== "") {
@@ -72,22 +72,16 @@ class JoblyApi {
       params.append("title", searchTerm);
     }
 
-    console.log({ params });
-
     if (minSalary !== "") {
       params.append("minSalary", minSalary);
     }
-    console.log({ params });
 
     if (hasEquity !== false) {
       params.append("hasEquity", hasEquity);
     }
 
-    console.log({ params });
-
     const queryString = params.toString();
     const endpoint = `jobs${queryString !== "" ? `?${queryString}` : ""}`;
-    console.log("endpoint", endpoint);
 
     let res = await this.request(endpoint);
     return res.jobs;
@@ -118,7 +112,6 @@ class JoblyApi {
     } catch (error) {
       console.error("Register Error", error);
       return { error: "Username already taken" };
-      // return error;
     }
   }
 

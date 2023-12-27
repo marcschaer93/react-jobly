@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 
 export const SalarySelect = ({ salary, handleChange }) => {
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 150 }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Salary</InputLabel>
         <Select
@@ -18,11 +18,14 @@ export const SalarySelect = ({ salary, handleChange }) => {
           onChange={handleChange}
           size="small"
           name="minSalary"
+          defaultValue={""}
         >
+          <MenuItem value={""}>All</MenuItem>
           <MenuItem value={80000}>80'000</MenuItem>
           <MenuItem value={120000}>120'000</MenuItem>
           <MenuItem value={150000}>150'000</MenuItem>
           <MenuItem value={180000}>180'000</MenuItem>
+          <MenuItem value={200000}>200'000</MenuItem>
         </Select>
       </FormControl>
     </Box>
