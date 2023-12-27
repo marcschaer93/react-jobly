@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
 import { ViewMoreButton } from "../componets/ui/ViewMoreButton";
 import { SalarySelect } from "../componets/form/SalarySelect";
+import Navbar2 from "../componets/Navbar2";
 
 /**
  * JobList Component
@@ -153,73 +154,73 @@ export const JobList = ({ jobs, onFilterChange, jobFilter }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        gap: "15px",
-        borderTop: "1px black solid",
-        pt: "50px",
-      }}
-    >
-      <Box>
-        <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-        <Box
-          sx={{
-            // backgroundColor: "#89CFF0",
-            display: "flex",
-            gap: "40px",
-            marginRight: "420px",
-          }}
-        >
-          <SalarySelect salary={minSalary} handleChange={handleChange} />
-          <FormControlLabel
-            control={
-              <Checkbox
-                name="hasEquity"
-                onChange={handleChange}
-                value={hasEquity}
-              />
-            }
-            label="Equity"
-          />
-        </Box>
+    <>
+      <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "40px",
+          mt: "25px",
+        }}
+      >
+        <SalarySelect salary={minSalary} handleChange={handleChange} />
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="hasEquity"
+              onChange={handleChange}
+              value={hasEquity}
+            />
+          }
+          label="Equity"
+        />
       </Box>
-      {visibleJobs && visibleJobs.length > 0 ? (
-        <>
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "15px",
+          pt: "25px",
+        }}
+      >
+        {visibleJobs && visibleJobs.length > 0 ? (
+          <>
+            <Box
+              component="ul"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "25px",
+                listStyle: "none",
+              }}
+            >
+              {visibleJobs.map((j) => (
+                <Box component="li" key={j.id}>
+                  <JobCard jobData={j} />
+                </Box>
+              ))}
+            </Box>
+            <Box>
+              <ViewMoreButton handleViewMore={handleViewMore} />
+            </Box>
+          </>
+        ) : (
           <Box
-            component="ul"
             sx={{
               display: "flex",
-              flexDirection: "column",
-              gap: "25px",
-              listStyle: "none",
+              textAlign: "center",
+              justifyContent: "center",
             }}
           >
-            {visibleJobs.map((j) => (
-              <Box component="li" key={j.id}>
-                {<JobCard jobData={j} />}
-              </Box>
-            ))}
+            <Typography sx={{ fontSize: "1.2rem" }} variant="body">
+              No jobs available
+            </Typography>
           </Box>
-          <Box>
-            <ViewMoreButton handleViewMore={handleViewMore} />
-          </Box>
-        </>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            textAlign: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem" }} variant="body">
-            No jobs available
-          </Typography>
-        </Box>
-      )}
-    </Box>
+        )}
+      </Box>
+    </>
   );
 };

@@ -47,47 +47,50 @@ export const CompanyList = ({ companies, onFilterChange, companyFilter }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        gap: "25px",
-      }}
-    >
+    <>
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-      {visibleCompanies && visibleCompanies.length > 0 ? (
-        <>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "25px",
+          mt: "30px",
+        }}
+      >
+        {visibleCompanies && visibleCompanies.length > 0 ? (
+          <>
+            <Box
+              component="ul"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "25px",
+                listStyle: "none",
+              }}
+            >
+              {visibleCompanies.map((c) => (
+                <Box component="li" key={c.handle}>
+                  <CompanyOverview companyData={c} />
+                </Box>
+              ))}
+            </Box>
+            <ViewMoreButton handleViewMore={handleViewMore} />
+          </>
+        ) : (
           <Box
-            component="ul"
             sx={{
               display: "flex",
-              flexDirection: "column",
-              gap: "25px",
-              listStyle: "none",
+              textAlign: "center",
+              justifyContent: "center",
             }}
           >
-            {visibleCompanies.map((c) => (
-              <Box component="li" key={c.handle}>
-                <CompanyOverview companyData={c} />
-              </Box>
-            ))}
+            <Typography sx={{ fontSize: "1.2rem" }} variant="body">
+              No companies available
+            </Typography>
           </Box>
-          <ViewMoreButton handleViewMore={handleViewMore} />
-        </>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            textAlign: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography sx={{ fontSize: "1.2rem" }} variant="body">
-            No companies available
-          </Typography>
-        </Box>
-      )}
-    </Box>
+        )}
+      </Box>
+    </>
   );
 };
