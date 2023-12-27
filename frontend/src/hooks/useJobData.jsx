@@ -14,23 +14,50 @@ import JoblyApi from "../utils/api";
  *                    - {boolean} isLoading - Loading state for data fetching
  */
 
+// export const useJobData = (filter) => {
+//   const [jobs, setJobs] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   console.log("filter", filter);
+//   const { searchTerm, minSalary, hasEquity } = filter;
+//   console.log({ searchTerm });
+//   console.log({ hasEquity });
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const filteredJobs = await JoblyApi.getJobs(
+//           searchTerm,
+//           minSalary,
+//           hasEquity
+//         );
+//         setJobs(filteredJobs);
+//         setIsLoading(false);
+//       } catch (error) {
+//         console.error("Error fetching jobs:", error);
+//         setJobs([]);
+//         setIsLoading(false);
+//       }
+//     };
+
+//     fetchData();
+//   }, [filter]);
+
+//   return { jobs, isLoading };
+// };
+
 export const useJobData = (filter) => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { searchTerm } = filter;
+  console.log("filter", filter);
+  //   const { searchTerm, minSalary, hasEquity } = filter;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (searchTerm === "") {
-          const jobs = await JoblyApi.getAllJobs();
-          setJobs(jobs);
-        } else {
-          const filteredJobs = await JoblyApi.filterJobs(searchTerm);
-          console.log("filteredJobs", filteredJobs);
-          setJobs(filteredJobs);
-        }
+        const filteredJobs = await JoblyApi.getJobs(filter);
+        setJobs(filteredJobs);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -38,6 +65,7 @@ export const useJobData = (filter) => {
         setIsLoading(false);
       }
     };
+
     fetchData();
   }, [filter]);
 

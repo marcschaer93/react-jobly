@@ -47,14 +47,14 @@ export const RegisterForm = () => {
     },
   });
 
-  const { setUserToken } = useContext(CurrentUserContext);
+  const { setToken } = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
   const onFormSubmit = async (data) => {
     const registrationResult = await JoblyApi.registerUser(data);
     if (registrationResult.token) {
       const token = registrationResult.token;
-      setUserToken(token);
+      setToken(token);
       navigate("/");
       reset();
     } else {
@@ -71,10 +71,8 @@ export const RegisterForm = () => {
         <Typography variant="h1" sx={{ fontSize: "48px", fontWeight: 700 }}>
           Register Form
         </Typography>
-
         <Box sx={underline}></Box>
       </Box>
-
       <form autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
         <Box sx={inputs}>
           <Box sx={input}>
@@ -85,7 +83,6 @@ export const RegisterForm = () => {
               errors={errors}
             />
           </Box>
-
           <Box sx={{ display: "flex", gap: "20px" }}>
             <Box sx={{ width: "230px" }}>
               <FormInputText
@@ -104,7 +101,6 @@ export const RegisterForm = () => {
               />
             </Box>
           </Box>
-
           <Box sx={input}>
             <FormInputText
               name="email"
@@ -135,7 +131,6 @@ export const RegisterForm = () => {
           </Button>
         </Box>
       </form>
-
       <Box sx={switchContainer}>
         Already a Member ?
         <Box component={Link} to="/login" exact="true" sx={link}>

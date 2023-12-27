@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import { CompanyOverview } from "../componets/CompanyOverview";
 import { SearchBar } from "../componets/ui/searchBar";
 import { useState, useEffect } from "react";
+import { ViewMoreButton } from "../componets/ui/ViewMoreButton";
+import { Typography } from "@mui/material";
 
 /**
  * CompanyList Component
@@ -14,16 +16,33 @@ import { useState, useEffect } from "react";
  * @returns {JSX.Element} - Company list along with search bar for filtering
  */
 
-export const CompanyList = ({ companies, filter }) => {
+export const CompanyList = ({ companies, filterCompanies }) => {
   const [searchTerm, setSearchterm] = useState("");
+  const [visibleCompanies, setVisibleCompanies] = useState([]);
 
   const handleChange = (e) => {
     setSearchterm(e.target.value);
   };
 
   useEffect(() => {
-    filter({ searchTerm });
+    filterCompanies({ searchTerm });
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (companies) {
+      setVisibleCompanies(companies.slice(0, 10));
+    }
+  }, [companies]);
+
+  const handleViewMore = () => {
+    if (companies) {
+      const nextCompanies = companies.slice(
+        visibleCompanies.length,
+        visibleCompanies.length + 10
+      );
+      setVisibleCompanies((current) => [...current, ...nextCompanies]);
+    }
+  };
 
   return (
     <Box
@@ -35,17 +54,29 @@ export const CompanyList = ({ companies, filter }) => {
       }}
     >
       <SearchBar searchTerm={searchTerm} handleChange={handleChange} />
-
-      {companies && companies.length > 0 ? (
-        <Box component="ul" sx={{ listStyle: "none" }}>
-          {companies.map((c) => (
-            <Box component="li" key={c.handle}>
-              <CompanyOverview companyData={c} />
-            </Box>
-          ))}
-        </Box>
+      {visibleCompanies && visibleCompanies.length > 0 ? (
+        <>
+          <Box component="ul" sx={{ listStyle: "none" }}>
+            {visibleCompanies.map((c) => (
+              <Box component="li" key={c.handle}>
+                <CompanyOverview companyData={c} />
+              </Box>
+            ))}
+          </Box>
+          <ViewMoreButton handleViewMore={handleViewMore} />
+        </>
       ) : (
-        <p>No companies available</p>
+        <Box
+          sx={{
+            display: "flex",
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Typography sx={{ fontSize: "1.2rem" }} variant="body">
+            No companies available
+          </Typography>
+        </Box>
       )}
     </Box>
   );

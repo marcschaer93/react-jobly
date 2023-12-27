@@ -43,31 +43,69 @@ class JoblyApi {
     return res.company;
   }
 
-  static async getAllCompanies() {
-    let res = await this.request(`companies`);
+  // static async getAllCompanies() {
+  //   let res = await this.request(`companies`);
+  //   return res.companies;
+  // }
+
+  // static async filterCompanies(searchTerm) {
+  //   let res = await this.request(`companies?name=${searchTerm}`);
+  //   return res.companies;
+  // }
+
+  static async getCompanies(searchTerm) {
+    let endpoint = "companies";
+
+    if (searchTerm !== "") {
+      endpoint = endpoint + `?name=${searchTerm}`;
+      console.log("endpoint", endpoint);
+    }
+
+    let res = await this.request(endpoint);
     return res.companies;
   }
 
-  static async filterCompanies(searchTerm) {
-    let res = await this.request(`companies?name=${searchTerm}`);
-    return res.companies;
-  }
+  static async getJobs({ searchTerm = "", minSalary = "", hasEquity = false }) {
+    const params = new URLSearchParams();
 
-  static async getAllJobs() {
-    let res = await this.request(`jobs`);
+    if (searchTerm !== "") {
+      params.append("title", searchTerm);
+    }
+
+    console.log({ params });
+
+    if (minSalary !== "") {
+      params.append("minSalary", minSalary);
+    }
+    console.log({ params });
+
+    if (hasEquity !== false) {
+      params.append("hasEquity", hasEquity);
+    }
+
+    console.log({ params });
+
+    const queryString = params.toString();
+    const endpoint = `jobs${queryString !== "" ? `?${queryString}` : ""}`;
+    console.log("endpoint", endpoint);
+
+    let res = await this.request(endpoint);
     return res.jobs;
   }
 
-  static async filterJobs(searchTerm) {
-    let res = await this.request(`jobs?title=${searchTerm}`);
-    console.log("response filter jobs", res.jobs);
-    return res.jobs;
-  }
+  // static async getAllJobs() {
+  //   let res = await this.request(`jobs`);
+  //   return res.jobs;
+  // }
+
+  // static async filterJobs(searchTerm) {
+  //   let res = await this.request(`jobs?title=${searchTerm}`);
+  //   console.log("response filter jobs", res.jobs);
+  //   return res.jobs;
+  // }
 
   static async loginUser(username, password) {
     let res = await this.request(`auth/token`, { username, password }, "post");
-    // this.token = res.token; // Set the token in the class upon successful login
-    // console.log("this.token", token);
     console.log("response", res);
     console.log(res.token);
     return res.token;
@@ -79,10 +117,6 @@ class JoblyApi {
       return { token: res.token };
     } catch (error) {
       console.error("Register Error", error);
-      // if (error.response?.data === "Username already taken") {
-      //   return { error: "Username already taken" };
-      // }
-      // return { error: "Registration failed" };
       return { error: "Username already taken" };
       // return error;
     }

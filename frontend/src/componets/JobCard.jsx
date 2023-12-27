@@ -22,11 +22,9 @@ import { CurrentUserContext } from "../utils/UserContext";
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
 
-  const { currentUser, userToken, setCurrentUser } =
-    useContext(CurrentUserContext);
+  const { currentUser, token, setCurrentUser } = useContext(CurrentUserContext);
 
   const appliedJobIds = currentUser ? currentUser.applications : [""];
-
   const [applied, setApplied] = useState(false);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export const JobCard = ({ jobData }) => {
     if (applied) return;
 
     try {
-      await JoblyApi.applyForJob(jobData.id, userToken);
+      await JoblyApi.applyForJob(jobData.id, token);
     } catch (error) {
       console.error("Error applying for job:", error);
     }
@@ -50,7 +48,11 @@ export const JobCard = ({ jobData }) => {
   };
 
   if (!jobData) {
-    return <p>Job not found</p>;
+    return (
+      <Box sx={{ textAlign: "center" }}>
+        <Typography variant="body2">Job not found</Typography>
+      </Box>
+    );
   }
 
   const { title, salary, equity, companyName } = jobData;

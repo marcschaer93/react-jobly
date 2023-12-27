@@ -30,9 +30,7 @@ export const CompanyCard = ({ companies, jobs }) => {
   }
 
   const { name, description, logoUrl, numEmployees, handle } = companyData;
-
   const companyJobs = jobs.filter((j) => j.companyHandle === handle);
-  console.log({ companyJobs });
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Typography, Box } from "@mui/material";
-import { useNavigate, Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../utils/UserContext";
 import { FormInputUsername } from "./form/FormInputUsername";
@@ -29,10 +29,8 @@ import {
  */
 
 export const LoginForm = () => {
-  const { setCurrentUser, currentUser, loginUser } =
-    useContext(CurrentUserContext);
   const navigate = useNavigate();
-
+  const { loginUser } = useContext(CurrentUserContext);
   const {
     control,
     handleSubmit,

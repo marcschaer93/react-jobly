@@ -24,13 +24,8 @@ export const useCompanyData = (filter) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (searchTerm === "") {
-          const allCompanies = await JoblyApi.getAllCompanies();
-          setCompanies(allCompanies);
-        } else {
-          const filteredCompanies = await JoblyApi.filterCompanies(searchTerm);
-          setCompanies(filteredCompanies);
-        }
+        const filteredCompanies = await JoblyApi.getCompanies(searchTerm);
+        setCompanies(filteredCompanies);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching companies:", error);

@@ -30,15 +30,14 @@ import {
  */
 
 export const EditForm = () => {
-  const { currentUser, setCurrentUser, userToken } =
-    useContext(CurrentUserContext);
+  const navigate = useNavigate();
+  const { currentUser, setCurrentUser, token } = useContext(CurrentUserContext);
 
   const { username, firstName, lastName, email } = currentUser;
 
   const {
     control,
     handleSubmit,
-    reset,
     setError, // Add setError from useForm
     formState: { errors }, // Handling form validation errors
   } = useForm({
@@ -50,13 +49,11 @@ export const EditForm = () => {
     },
   });
 
-  const navigate = useNavigate();
-
   const onFormSubmit = (data) => {
     const { firstName, lastName, email } = data;
     const dataWithoutUsername = { firstName, lastName, email };
 
-    JoblyApi.editUserProfile(dataWithoutUsername, userToken);
+    JoblyApi.editUserProfile(dataWithoutUsername, token);
     setCurrentUser(() => data);
     navigate("/");
   };
