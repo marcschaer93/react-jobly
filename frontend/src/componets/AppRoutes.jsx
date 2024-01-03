@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
@@ -22,6 +23,7 @@ import { useJobData } from "../hooks/useJobData";
  */
 
 export const AppRoutes = () => {
+  const theme = useTheme();
   const [filter, setFilter] = useState({
     jobFilter: { searchTerm: "", minSalary: "", hasEquity: false },
     companyFilter: { searchTerm: "" },

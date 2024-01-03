@@ -8,8 +8,6 @@ import { theme } from "/src/utils/theme.js";
 import { AppRoutes } from "./componets/AppRoutes";
 import { CurrentUserContext } from "./utils/UserContext";
 
-// import Navbar2 from "./componets/Navbar2";
-
 /**
  * App Component
  *

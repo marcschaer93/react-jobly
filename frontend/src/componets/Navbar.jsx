@@ -8,7 +8,7 @@ import { useTheme } from "@mui/material";
 import React, { useContext } from "react";
 
 import { CurrentUserContext } from "../utils/UserContext";
-import { navLinkStyle } from "../styles/navbarStyles";
+// import { navLinkStyle } from "../styles/navbarStyles";
 
 /**
  * Navbar Component
@@ -22,6 +22,21 @@ import { navLinkStyle } from "../styles/navbarStyles";
 export default function Navbar() {
   const theme = useTheme();
   const { currentUser, logoutUser } = useContext(CurrentUserContext);
+
+  const navLinkStyle = {
+    color: "#ccc", // Light gray color for inactive links
+    textDecoration: "none",
+    borderBottom: "2px solid transparent",
+    borderRadius: "0px",
+    padding: "20px",
+    "&:hover": {
+      color: "#1976d2", // Change color on hover
+    },
+    "&.active": {
+      color: "#fff", // White color for active link
+      borderBottomColor: theme.palette.secondary.main, // Red line underneath active link
+    },
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
