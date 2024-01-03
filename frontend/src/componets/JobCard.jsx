@@ -23,12 +23,14 @@ import { CurrentUserContext } from "../utils/UserContext";
 export const JobCard = ({ jobData }) => {
   const theme = useTheme();
 
+  const { title, salary, equity, companyName, logoUrl } = jobData;
   const { currentUser, token, setCurrentUser } = useContext(CurrentUserContext);
 
   const appliedJobIds = currentUser ? currentUser.applications : [""];
   const [applied, setApplied] = useState(false);
 
   useEffect(() => {
+    if (!appliedJobIds) return;
     const alreadyApplied = appliedJobIds.find((jobId) => jobId === jobData.id);
     if (alreadyApplied) setApplied(true);
   }, [appliedJobIds, jobData.id]);
@@ -56,13 +58,10 @@ export const JobCard = ({ jobData }) => {
     );
   }
 
-  const { title, salary, equity, companyName, logoUrl } = jobData;
-
   return (
     <>
       <Box sx={cardContainer}>
         <Card sx={card}>
-          {" "}
           <CardContent sx={cardContent}>
             <Typography variant="h5" color="text.secondary" gutterBottom>
               {title}
@@ -74,26 +73,15 @@ export const JobCard = ({ jobData }) => {
             <Typography sx={{ mb: 1.5 }} color="black">
               {logoUrl ? logoUrl : null}
             </Typography>
+
             <Typography variant="body2">
-              {salary ? (
-                <div>
-                  <span style={{ fontWeight: "bold" }}>Salary:</span>{" "}
-                  {`${salary}`}
-                </div>
-              ) : (
-                ""
-              )}
+              {salary && <span style={{ fontWeight: "bold" }}>Salary: </span>}
+              {salary}
               <br />
             </Typography>
             <Typography variant="body2">
-              {equity ? (
-                <div>
-                  <span style={{ fontWeight: "bold" }}>Equity:</span>{" "}
-                  {`${equity}`}
-                </div>
-              ) : (
-                ""
-              )}
+              {equity && <span style={{ fontWeight: "bold" }}>Equity: </span>}
+              {equity}
               <br />
             </Typography>
           </CardContent>

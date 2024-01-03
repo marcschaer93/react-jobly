@@ -32,9 +32,7 @@ import {
 export const EditForm = () => {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser, token } = useContext(CurrentUserContext);
-
   const { username, firstName, lastName, email } = currentUser;
-
   const {
     control,
     handleSubmit,
@@ -77,14 +75,6 @@ export const EditForm = () => {
               errors={errors}
               disabled={true}
             />
-
-            {/* <TextField
-              label="Username"
-              variant="outlined"
-              value={`${username}`}
-              fullWidth
-              disabled
-            /> */}
           </Box>
 
           <Box sx={{ display: "flex", gap: "20px" }}>

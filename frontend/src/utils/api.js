@@ -58,7 +58,6 @@ class JoblyApi {
 
     if (searchTerm !== "") {
       endpoint = endpoint + `?name=${searchTerm}`;
-      console.log("endpoint", endpoint);
     }
 
     let res = await this.request(endpoint);
@@ -87,21 +86,8 @@ class JoblyApi {
     return res.jobs;
   }
 
-  // static async getAllJobs() {
-  //   let res = await this.request(`jobs`);
-  //   return res.jobs;
-  // }
-
-  // static async filterJobs(searchTerm) {
-  //   let res = await this.request(`jobs?title=${searchTerm}`);
-  //   console.log("response filter jobs", res.jobs);
-  //   return res.jobs;
-  // }
-
   static async loginUser(username, password) {
     let res = await this.request(`auth/token`, { username, password }, "post");
-    console.log("response", res);
-    console.log(res.token);
     return res.token;
   }
 
@@ -119,7 +105,6 @@ class JoblyApi {
     const username = JoblyApi.getUsernameByToken(token);
 
     let res = await this.request(`users/${username}`, {}, "get", token);
-    console.log("response getuserData", res.user);
     return res.user;
   }
 
@@ -132,7 +117,6 @@ class JoblyApi {
       "post",
       token
     );
-    console.log("response applyForJob", res);
     return res;
   }
 

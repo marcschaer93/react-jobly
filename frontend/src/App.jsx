@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 
-import "./App.css";
 import JoblyApi from "./utils/api";
 import Navbar from "./componets/Navbar";
 import { theme } from "/src/utils/theme.js";

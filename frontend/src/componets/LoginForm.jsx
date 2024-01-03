@@ -37,10 +37,10 @@ export const LoginForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      username: "testuser",
-      password: "password",
-    },
+    // defaultValues: {
+    //   username: "testuser",
+    //   password: "password",
+    // },
   });
 
   const onFormSubmit = async (data) => {

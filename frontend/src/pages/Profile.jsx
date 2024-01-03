@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { EditForm } from "../componets/EditForm";
 import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
