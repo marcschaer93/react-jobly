@@ -1,13 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
-
-// use localhost for local Development
 // ***********************************
-// const BASE_URL = "http://localhost:3001";
-// const BASE_URL =
-//   "https://react-jobly-backend-e7vv.onrender.com" || "http://localhost:3001";
+// use localhost for local Development
 const BASE_URL =
   import.meta.env.VITE_REACT_APP_BASE_URL || "http://localhost:3001";
 
