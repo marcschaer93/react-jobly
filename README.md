@@ -4,6 +4,11 @@
 
 This repository contains the backend and frontend for the React Jobly project. The backend serves as the API, while the frontend interacts with this API to provide a user interface for viewing companies, jobs, and applying for jobs.
 
+## Technologies
+
+**Backend**: Node.js, Express.js
+**Frontend**: React, Material UI
+
 ### Folder Structure
 
 #### Backend
@@ -18,9 +23,8 @@ The React frontend for the Jobly project, responsible for user interaction and r
 
 ### Steps
 
-1. Use the provided `express-jobly` solution as the backend.
-2. Recreate the Jobly database using the provided `jobly.sql` file.
-3. Start the backend on port 3001.
+1. Recreate the Jobly database using the provided `jobly.sql` file.
+2. Start the backend on port 3001.
 
 ### API Helper
 
@@ -36,12 +40,13 @@ Utilizes the `JoblyApi` class to centralize API requests to the backend and prov
 - `/signup`: Signup form
 - `/profile`: Edit profile page
 
-### Deployment
+### Deployment Links
 
-Deploy the backend using Heroku:
+The backend is deployed on Render:
+[Backend Deployment Link](https://react-jobly-backend-e7vv.onrender.com/)
 
-- Run necessary Heroku commands.
-- Push the code to Heroku and copy the local database to the production one.
+The frontend is also deployed on Render:
+[Frontend Deployment Link](https://react-jobly-30mu.onrender.com/)
 
 ## Frontend Setup
 
@@ -60,12 +65,67 @@ Deploy the backend using Heroku:
 - Create a profile page for users to edit their profiles.
 - Enable job applications functionality.
 
-### Further Study
+### Local Development
 
-For additional learning, refer to the provided link for suggestions on further study.
+**Backend SetUp**
 
-### Solution
+Navigate to the Backend Directory:
 
-View the provided solution [here](http://curric.rithmschool.com/springboard/exercises/react-jobly/solution).
+```
+bash
+cd backend
+```
 
-Feel free to modify this README.md according to the specific structure, features, or additional details of your React Jobly project.
+Install Dependencies:
+
+```
+bash
+npm install
+```
+
+Recreate the Jobly Database:
+
+- Use the provided jobly.sql file to recreate the Jobly database.
+
+Start the Backend:
+
+```
+bash
+npm start
+```
+
+The backend will start on port 3001.
+
+**Frontend Setup**
+
+Navigate to the Frontend Directory:
+
+```
+bash
+cd frontend_directory
+```
+
+Install Dependencies:
+
+```
+bash
+npm install
+```
+
+Set Backend URL:
+
+In the frontend code, define the base URL to connect to the local backend (http://localhost:3001).
+
+Start the Frontend:
+
+```
+bash
+npm run dev
+```
+
+The frontend development server will start.
+
+Accessing Locally
+
+Backend will be running at http://localhost:3001.
+Frontend will be accessible at http://localhost:3000 by default.
