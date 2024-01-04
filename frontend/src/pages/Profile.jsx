@@ -1,4 +1,4 @@
-import { EditForm } from "../componets/EditForm";
+import { EditForm } from "../components/EditForm";
 import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
 import { Navigate } from "react-router-dom";

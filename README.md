@@ -112,7 +112,7 @@ bash
 npm install
 ```
 
-Set Backend URL:
+**Set Backend URL**:
 
 In the frontend code, define the base URL to connect to the local backend (http://localhost:3001).
 

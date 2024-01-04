@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
-import { JobCard } from "../componets/JobCard";
+import { JobCard } from "../components/JobCard";
 import { Typography } from "@mui/material";
-import { SearchBar } from "../componets/ui/SearchBar";
+import { SearchBar } from "../components/ui/SearchBar";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
@@ -11,8 +11,8 @@ import { useState, useEffect } from "react";
 
 import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
-import { ViewMoreButton } from "../componets/ui/ViewMoreButton";
-import { SalarySelect } from "../componets/form/SalarySelect";
+import { ViewMoreButton } from "../components/ui/ViewMoreButton";
+import { SalarySelect } from "../components/form/SalarySelect";
 
 /**
  * JobList Component

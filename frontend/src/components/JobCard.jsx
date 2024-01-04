@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import { useState, useEffect, useContext } from "react";
 
-import JoblyApi from "../utils/api";
+import JoblyApi from "../api";
 import { ApplyButton } from "./ui/ApplyButton";
 import { card, cardContainer, cardContent } from "../styles/cardStyles";
 import { CurrentUserContext } from "../utils/UserContext";

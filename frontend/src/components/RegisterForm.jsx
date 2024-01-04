@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
+import { useTheme } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Typography, Box } from "@mui/material";
 
-import JoblyApi from "../utils/api";
+import JoblyApi from "../api";
 import { FormInputText } from "./form/FormInputText";
 import { CurrentUserContext } from "../utils/UserContext";
-
 import {
   formContainer,
   titleContainer,
@@ -16,67 +16,73 @@ import {
   submitContainer,
   switchContainer,
   link,
-  lostPasswordContainer,
   submitButton,
 } from "../styles/formStyles";
 
 /**
- * EditForm Component
+ * RegisterForm Component
  *
- * Renders a form to edit user profile details like username, first name, last name, and email.
- * Utilizes useContext, useForm hooks for form handling, and user authentication data.
+ * Renders a registration form allowing users to sign up.
+ * Utilizes useForm for form control and validation, CurrentUserContext for user-related actions, and JoblyApi for registration.
  *
- * @returns {JSX.Element} - Form for editing user profile.
+ * @returns {JSX.Element} - A registration form component with input fields for username, password, first name, last name, and email.
  */
 
-export const EditForm = () => {
-  const navigate = useNavigate();
-  const { currentUser, setCurrentUser, token } = useContext(CurrentUserContext);
-  const { username, firstName, lastName, email } = currentUser;
+export const RegisterForm = () => {
+  const theme = useTheme();
+
   const {
     control,
     handleSubmit,
+    reset,
     setError, // Add setError from useForm
     formState: { errors }, // Handling form validation errors
   } = useForm({
-    defaultValues: {
-      username: `${username}`,
-      firstName: `${firstName}`,
-      lastName: `${lastName}`,
-      email: `${email}`,
-    },
+    // defaultValues: {
+    //   username: "marcschaer",
+    //   password: "199316",
+    //   firstName: "Marc",
+    //   lastName: "Schär",
+    //   email: "marc.schaer93@gmail.com",
+    // },
   });
 
-  const onFormSubmit = (data) => {
-    const { firstName, lastName, email } = data;
-    const dataWithoutUsername = { firstName, lastName, email };
+  const { setToken } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
 
-    JoblyApi.editUserProfile(dataWithoutUsername, token);
-    setCurrentUser(() => data);
-    navigate("/");
+  const onFormSubmit = async (data) => {
+    const registrationResult = await JoblyApi.registerUser(data);
+    if (registrationResult.token) {
+      const token = registrationResult.token;
+      setToken(token);
+      navigate("/");
+      reset();
+    } else {
+      setError("username", {
+        type: "manual",
+        message: `${registrationResult.error}`,
+      });
+    }
   };
 
   return (
     <Box sx={formContainer}>
       <Box sx={titleContainer}>
         <Typography variant="h1" sx={{ fontSize: "48px", fontWeight: 700 }}>
-          Profile
+          Register Form
         </Typography>
         <Box sx={underline}></Box>
       </Box>
-
       <form autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
-        <Box sx={inputs} className="inputs">
-          <Box sx={input} className="input">
+        <Box sx={inputs}>
+          <Box sx={input}>
             <FormInputText
               name="username"
               control={control}
               label="Username"
               errors={errors}
-              disabled={true}
             />
           </Box>
-
           <Box sx={{ display: "flex", gap: "20px" }}>
             <Box sx={{ width: "230px" }}>
               <FormInputText
@@ -95,8 +101,7 @@ export const EditForm = () => {
               />
             </Box>
           </Box>
-
-          <Box sx={input} className="input">
+          <Box sx={input}>
             <FormInputText
               name="email"
               control={control}
@@ -104,9 +109,17 @@ export const EditForm = () => {
               errors={errors}
             />
           </Box>
+          <Box sx={input}>
+            <FormInputText
+              name="password"
+              control={control}
+              label="Password"
+              errors={errors}
+            />
+          </Box>
         </Box>
 
-        <Box sx={submitContainer} className="submit-container">
+        <Box sx={submitContainer}>
           <Button
             variant="contained"
             color="primary"
@@ -114,10 +127,16 @@ export const EditForm = () => {
             size="medium"
             sx={submitButton}
           >
-            Save Changes
+            Register
           </Button>
         </Box>
       </form>
+      <Box sx={switchContainer}>
+        Already a Member ?
+        <Box component={Link} to="/login" exact="true" sx={link}>
+          Login
+        </Box>
+      </Box>
     </Box>
   );
 };

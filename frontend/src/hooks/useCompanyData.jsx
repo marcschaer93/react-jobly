@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import JoblyApi from "../utils/api";
+import JoblyApi from "../api";
 
 /**
  * useCompanyData Hook

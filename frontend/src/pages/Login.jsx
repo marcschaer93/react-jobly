@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
-import { LoginForm } from "../componets/LoginForm";
-import { RegisterForm } from "../componets/RegisterForm";
+import { LoginForm } from "../components/LoginForm";
+import { RegisterForm } from "../components/RegisterForm";
 
 /**
  * Login Component

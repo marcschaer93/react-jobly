@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 
-import JoblyApi from "./utils/api";
-import Navbar from "./componets/Navbar";
+import JoblyApi from "./api";
+import Navbar from "./components/Navbar";
 import { theme } from "/src/utils/theme.js";
-import { AppRoutes } from "./componets/AppRoutes";
+import { AppRoutes } from "./components/AppRoutes";
 import { CurrentUserContext } from "./utils/UserContext";
 
 /**
