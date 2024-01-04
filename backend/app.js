@@ -20,7 +20,7 @@ const app = express();
 // app.use(cors());
 
 // Allow requests from a specific origin
-app.use(cors({ origin: "https://react-jobly-30mu.onrender.com/" }));
+app.use(cors({ origin: "https://react-jobly-30mu.onrender.com" }));
 
 app.use(express.json());
 app.use(morgan("tiny"));
