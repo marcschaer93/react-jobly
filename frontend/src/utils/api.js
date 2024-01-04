@@ -2,8 +2,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
-const BASE_URL = "http://localhost:3001";
-// const BASE_URL = "https://react-jobly.onrender,com";
+// const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://react-jobly-backend-e7vv.onrender.com/";
 
 /** API Class.
  *
