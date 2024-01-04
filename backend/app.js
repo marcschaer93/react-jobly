@@ -17,16 +17,16 @@ const morgan = require("morgan");
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 
 // Allow requests from the deployed frontend on Render
-app.use(cors({ origin: "https://react-jobly-30mu.onrender.com" }));
+// app.use(cors({ origin: "https://react-jobly-30mu.onrender.com" }));
 
 // For local development
-if (process.env.NODE_ENV !== "production") {
-  // Allow requests from localhost:3000 (your local frontend server)
-  app.use(cors({ origin: "http://localhost:3000" }));
-}
+// if (process.env.NODE_ENV !== "production") {
+//   // Allow requests from localhost:3000 (your local frontend server)
+//   app.use(cors({ origin: "http://localhost:5173" }));
+// }
 
 app.use(express.json());
 app.use(morgan("tiny"));
