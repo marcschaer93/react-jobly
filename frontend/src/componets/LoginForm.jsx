@@ -81,7 +81,7 @@ export const LoginForm = () => {
         </Box>
 
         <Box
-          onClick={() => onFormSwitch("register")}
+          onClick={() => alert("Lost Password ? Sorry I can't Help you!")}
           sx={lostPasswordContainer}
         >
           Lost Password

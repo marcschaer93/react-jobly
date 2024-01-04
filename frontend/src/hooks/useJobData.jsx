@@ -13,39 +13,6 @@ import JoblyApi from "../utils/api";
  *                    - {Array} companies - List of companies based on the filter
  *                    - {boolean} isLoading - Loading state for data fetching
  */
-
-// export const useJobData = (filter) => {
-//   const [jobs, setJobs] = useState([]);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   console.log("filter", filter);
-//   const { searchTerm, minSalary, hasEquity } = filter;
-//   console.log({ searchTerm });
-//   console.log({ hasEquity });
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const filteredJobs = await JoblyApi.getJobs(
-//           searchTerm,
-//           minSalary,
-//           hasEquity
-//         );
-//         setJobs(filteredJobs);
-//         setIsLoading(false);
-//       } catch (error) {
-//         console.error("Error fetching jobs:", error);
-//         setJobs([]);
-//         setIsLoading(false);
-//       }
-//     };
-
-//     fetchData();
-//   }, [filter]);
-
-//   return { jobs, isLoading };
-// };
-
 export const useJobData = (filter) => {
   const [jobs, setJobs] = useState([]);
   const [jobsLoading, setJobsLoading] = useState(true);

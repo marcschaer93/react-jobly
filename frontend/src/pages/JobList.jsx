@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { JobCard } from "../componets/JobCard";
 import { Typography } from "@mui/material";
-import { SearchBar } from "../componets/ui/searchBar";
+import { SearchBar } from "../componets/ui/SearchBar";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
@@ -13,7 +13,6 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../utils/UserContext";
 import { ViewMoreButton } from "../componets/ui/ViewMoreButton";
 import { SalarySelect } from "../componets/form/SalarySelect";
-import Navbar2 from "../componets/Navbar2";
 
 /**
  * JobList Component

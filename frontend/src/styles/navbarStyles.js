@@ -1,6 +1,4 @@
-import { useTheme } from "@mui/material";
-
-const theme = useTheme();
+import { theme } from "/src/utils/theme.js";
 
 const navbarStyles = {
   navLinkStyle: {

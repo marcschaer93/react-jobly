@@ -1,7 +1,8 @@
 import Box from "@mui/material/Box";
 
 import { CompanyOverview } from "../componets/CompanyOverview";
-import { SearchBar } from "../componets/ui/searchBar";
+// import { SearchBar } from "../componets/ui/searchBar";
+import { SearchBar } from "../componets/ui/SearchBar";
 import { useState, useEffect } from "react";
 import { ViewMoreButton } from "../componets/ui/ViewMoreButton";
 import { Typography } from "@mui/material";
