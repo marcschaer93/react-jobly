@@ -19,7 +19,7 @@ export const Home = () => {
   const theme = useTheme();
   const { currentUser } = useContext(CurrentUserContext);
 
-  const backgroundImageUrl = "/src/assets/cropped.png";
+  const backgroundImageUrl = "/assets/cropped.png";
 
   return (
     <Box sx={containerStyle}>
