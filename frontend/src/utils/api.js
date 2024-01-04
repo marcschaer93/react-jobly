@@ -1,6 +1,6 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import BASE_URL from "../../config";
+// import BASE_URL from "../../config";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 const BASE_URL = import.meta.env.BASE_URL || "http://localhost:3001";
