@@ -17,7 +17,11 @@ const morgan = require("morgan");
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+
+// Allow requests from a specific origin
+app.use(cors({ origin: "https://react-jobly-30mu.onrender.com/" }));
+
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
