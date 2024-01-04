@@ -1,10 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import dotenv from "dotenv";
+import BASE_URL from "../../config";
 
-dotenv.config();
-
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+// const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 // const BASE_URL = "http://localhost:3001";
 // const BASE_URL = "https://react-jobly-backend-e7vv.onrender.com";
 
@@ -22,6 +20,7 @@ class JoblyApi {
 
   static async request(endpoint, data = {}, method = "get", token = null) {
     console.debug("API Call:", endpoint, data, method);
+    console.log("BASE_URL", BASE_URL);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
