@@ -5,8 +5,11 @@ import { jwtDecode } from "jwt-decode";
 
 // use localhost for local Development
 // ***********************************
+// const BASE_URL = "http://localhost:3001";
+// const BASE_URL =
+//   "https://react-jobly-backend-e7vv.onrender.com" || "http://localhost:3001";
 const BASE_URL =
-  "https://react-jobly-backend-e7vv.onrender.com" || "http://localhost:3001";
+  import.meta.env.VITE_REACT_APP_BASE_URL || "http://localhost:3001";
 
 /** API Class.
  *
